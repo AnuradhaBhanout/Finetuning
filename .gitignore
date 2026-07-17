@@ -15,3 +15,12 @@ faiss_index/
 # OS files
 .DS_Store
 Thumbs.db
+
+
+# Data & checkpoints
+data/raw/
+data/processed/
+*.jsonl
+checkpoints/
+outputs/
+*.safetensors
