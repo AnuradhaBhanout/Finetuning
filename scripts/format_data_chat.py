@@ -28,3 +28,5 @@ def load_raw(path):
                 continue
     return entries
  
+def is_player_speaker(speaker):
+    return speaker.strip().lower() in PLAYER_SPEAKER_NAMES
