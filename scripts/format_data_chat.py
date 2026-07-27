@@ -14,3 +14,17 @@ SYSTEM_TEMPLATE = (
     "Stay fully in character. Respond the way {speaker} would actually speak — "
     "in tone, vocabulary, and attitude — in one or two short lines."
 )
+
+def load_raw(path):
+    entries = []
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                entries.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+    return entries
+ 
