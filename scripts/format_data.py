@@ -87,7 +87,7 @@ def main():
     parser.add_argument("--max-words", type=int, default=60)
     parser.add_argument("--val-frac", type=float, default=0.05)
     parser.add_argument("--test-frac", type=float, default=0.05)
-    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--seed", type=int, default=40)
     args = parser.parse_args()
 
     raw = load_raw(args.input)
