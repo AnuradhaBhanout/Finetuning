@@ -46,3 +46,20 @@ def passes_filters(entry, min_words = 3, max_words = 60):
     if word_count < min_words or word_count > max_words:
         return False
     return True
+
+
+
+def format_example(entry):
+    speaker = clean_text(entry["speaker"])
+    dialogue = clean_text(entry["dialogue"])
+    context = clean_text(entry.get("context","General"))
+
+    user_turn = f"[Situation: {context}]"
+
+    messages = [
+        {"role":"system","content":SYSTEM_TEMPLATE.format(speaker=speaker)},
+        {"role":"user","content":user_turn},
+        {"role":"assistant","content":dialogue},
+    ]
+
+    return {"messages":messages,"speaker":speaker,"context":context}
