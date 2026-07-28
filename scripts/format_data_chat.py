@@ -63,3 +63,22 @@ def format_example(entry):
     ]
 
     return {"messages":messages,"speaker":speaker,"context":context}
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Format scraped dialogue into chat training data.")
+    parser.add_argument("--input",default="data/raw/dialogue_raw.jsonl")
+    parser.add_argument("--outdir",default="data/processed_chat")
+    parser.add_argument("--min-words",type=int,default=3)
+    parser.add_argument("--max-words",type=int,default=60)
+    parser.add_argument("--val-frac",type=float,default=0.05)
+    parser.add_argument("--test-frac",type=float,default=0.05)
+    parser.add_argument("--seed",type=int,default=42)
+    args = parser.parse_args()
+
+    raw = load_raw(args.input)
+    print(f"Loaded {len(raw)} raw entries.")
+
+    filtered = [e for e in raw if passes_filters(e,args.min_words,args.max_words)]
+
+    print(f"After filtering: {len(filtered)} entries.")
