@@ -85,7 +85,7 @@ def main():
     parser.add_argument("--outdir", default="data/processed")
     parser.add_argument("--min-words", type=int, default=3)
     parser.add_argument("--max-words", type=int, default=60)
-    parser.add_argument("--val-frac", type=float, default=0.03)
+    parser.add_argument("--val-frac", type=float, default=0.05)
     parser.add_argument("--test-frac", type=float, default=0.05)
     parser.add_argument("--seed", type=int, default=40)
     args = parser.parse_args()
