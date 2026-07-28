@@ -82,3 +82,26 @@ def main():
     filtered = [e for e in raw if passes_filters(e,args.min_words,args.max_words)]
 
     print(f"After filtering: {len(filtered)} entries.")
+
+    seen = set()
+    deduped = []
+
+    for e in filtered:
+        key = (e["speaker"].strip().lower(),e["dialogue"].strip().lower())
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(e)
+    print(f"After deduplication: {len(deduped)} entries.")
+
+    formatted = [format_example(e) for e in deduped]
+
+    random.seed(args.seed)
+    random.shuffle(formatted)
+
+    n = len(formatted)
+    n_val = int(n * args.val_frac)
+    n_test = int(n * args.test_frac)
+    n_train = n - n_val - n_test
+
+
