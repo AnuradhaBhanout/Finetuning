@@ -104,4 +104,27 @@ def main():
     n_test = int(n * args.test_frac)
     n_train = n - n_val - n_test
 
+    train = formatted[:n_train]
+    val = formatted[n_train:n_train+n_val]
+    test = formatted[n_train+n_val:]
 
+    outdir = Path(args.outdir)
+    outdir.mkdir(parents=True,exist_ok=True)
+
+    for name ,split in [("train",train),("val",val),("test",test)]:
+        out_path = outdir / f"{name}.jsonl"
+        with open(out_path,"w",encoding="utf-8") as f:
+            for ex in split:
+                f.write(json.dumps(ex,ensure_ascii=False)+"\n")
+        print(f"  {name}: {len(split)} examples -> {out_path}")
+
+    print(f"\nDone. {n_train} train / {n_val} val / {n_test} test examples.")
+
+    print("\n--- Sample formatted example ---")
+
+    if train:
+        print(json.dumps(train[0],indent=2, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    main()
