@@ -30,3 +30,19 @@ def load_raw(path):
  
 def is_player_speaker(speaker):
     return speaker.strip().lower() in PLAYER_SPEAKER_NAMES
+
+def clean_text(text):
+    return " ".join(text.split()).strip()
+
+def passes_filters(entry, min_words = 3, max_words = 60):
+    speaker = entry.get("speaker","").strip()
+    dialogue = entry.get("dialogue","").strip()
+
+    if not speaker or not dialogue:
+        return False
+    if is_player_speaker(speaker):
+        return False
+    word_count = len(dialogue.split())
+    if word_count < min_words or word_count > max_words:
+        return False
+    return True
