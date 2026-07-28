@@ -1,0 +1,1 @@
+#train_qwen.py — LoRA fine-tune Qwen2.5-1.5B-Instruct on Skyrim NPC dialogue (chat format).
