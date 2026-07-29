@@ -30,4 +30,16 @@ def main():
 
     model = AutoModelForCausalLM.from_pretrained(args.base_model,torch_dtype=torch.float16)
 
-    
+    lora_config = LoraConfig(
+        task_type=TaskType.CAUSAL_LM,
+        r=args.lora_r,
+        lora_alpha=args.lora_alpha,
+        lora_dropout=0.05,
+        target_modules=["q_proj","k_proj","v_proj","o_proj"],
+        bias="none",
+    )
+
+    model = get_peft_model(model,lora_config)
+    model.print_trainable_parameters()
+
+
