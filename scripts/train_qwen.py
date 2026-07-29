@@ -43,3 +43,48 @@ def main():
     model.print_trainable_parameters()
 
 
+    print("Loading dataset...")
+    dataset = load_dataset(
+        "json",
+        data_files={"train":args.train_file,"validation":args.val_file},
+    )
+
+    print(dataset)
+
+    sft_config = SFTConfig(
+        output_dir=args.output_dir,
+        num_train_epochs=args.epochs,
+        per_device_train_batch_size=args.batch_size,
+        per_device_eval_batch_size=args.batch_size,
+        gradient_accumulation_steps=args.grad_accum,
+        learning_rate=args.learning_rate,
+        logging_steps=25,
+        eval_strategy="steps",
+        eval_steps=100,
+        save_strategy="steps",
+        save_steps=100,
+        save_total_limit=2,
+        max_length=args.max_seq_length,
+        report_to="none",
+        fp16=True,
+    )
+
+    trainer = SFTTrainer(
+        model = model,
+        args = sft_config,
+        train_dataset=dataset["train"],
+        eval_dataset=dataset["validation"],
+    )
+
+    print("Starting training...")
+
+    trainer.train()
+
+
+    trainer.save_model(f"{args.output_dir}/final")
+    tokenizer.save_pretrained(f"{args.output_dir}/final")
+
+    print("Done.")
+
+    if __name__ == "__main__":
+        main()
