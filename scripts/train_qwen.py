@@ -16,7 +16,7 @@ def main():
     parser.add_argument("--output_dir",required=True)
     parser.add_argument("--base_model",default="Qwen/Qwen2.5-1.5B-Instruct")
     parser.add_argument("--epochs",type=float,default=3.0)
-    parser.add_argument("--batch_size",type=float,default=2)
+    parser.add_argument("--batch_size",type=int,default=2)
     parser.add_argument("--grad_accum",type=int,default=8)
     parser.add_argument("--learning_rate",type=float,default=2e-4)
     parser.add_argument("--max_seq_length",type=int,default=256)
