@@ -80,7 +80,7 @@ def main():
 
     trainer.train()
 
-
+    print(f"Saving final LoRA adapter to {args.output_dir}/final")
     trainer.save_model(f"{args.output_dir}/final")
     tokenizer.save_pretrained(f"{args.output_dir}/final")
 
