@@ -85,9 +85,13 @@ def main():
                     no_repeat_ngram_size=3,   # hard-blocks any 3-word phrase from repeating verbatim
                     pad_token_id=tokenizer.eos_token_id,
                 )
-            generated = tokenizer.decode(output[0], skip_special_tokens=True)
-            # Only print what came after the prompt, for readability
-            completion = generated[len(prompt):].strip()
+            # generated = tokenizer.decode(output[0], skip_special_tokens=True)
+            # # Only print what came after the prompt, for readability
+            # completion = generated[len(prompt):].strip()
+
+            input_length = inputs["input_ids"].shape[1]
+            completion_ids = output[0][input_length:]
+            completion = tokenizer.decode(completion_ids, skip_special_tokens=True).strip()
             print(f"  ({i+1}) {completion}")
 
     print("\n" + "=" * 70)
