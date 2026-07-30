@@ -58,4 +58,13 @@ def main():
     parser.add_argument("--adapter_dir", required=True, help="Path to the saved LoRA adapter ('final' folder).")
     parser.add_argument("--base_model", default="Qwen/Qwen2.5-1.5B-Instruct")
     args = parser.parse_args()
+
+    token = os.environ.get("DISCORD_BOT_TOKEN")
+    if not token:
+        raise SystemExit(
+            "DISCORD_BOT_TOKEN environment variable not set.\n"
+            'PowerShell: $env:DISCORD_BOT_TOKEN = "your-token-here"'
+        )
+
+    dialogue_model = DialogueModel(args.adapter_dir, args.base_model)
         
