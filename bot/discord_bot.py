@@ -45,4 +45,10 @@ class DialogueModel:
                 no_repeat_ngram_size=3,
                 pad_token_id=self.tokenizer.eos_token_id,
             )
+
+        # Slice by token position (not string length)
+        input_length = inputs["input_ids"].shape[1]
+        completion_ids = output[0][input_length:]
+        return self.tokenizer.decode(completion_ids, skip_special_tokens=True).strip()
+
         
