@@ -96,6 +96,7 @@ def clean_wikitext_fragment(text):
     text = re.sub(r'\[\[([^\]]+)\]\]', r'\1', text)             # [[target]]
     text = re.sub(r"'''(.*?)'''", r'\1', text)                  # bold
     text = re.sub(r"''(.*?)''", r'\1', text)                    # italic
+    text = re.sub(r'\[\[|\]\]', '', text)                       # strip any leftover unmatched brackets
     return text.strip()
 
 
