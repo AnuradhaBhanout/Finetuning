@@ -13,3 +13,20 @@ def build_prompt(tokenizer, character, situation):
     ]
     return tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
 
+
+class DialogueModel:
+    """Wraps the base model + LoRA adapter, loaded once at startup."""
+
+    def __init__(self, adapter_dir, base_model="Qwen/Qwen2.5-1.5B-Instruct"):
+        print(f"Loading tokenizer + base model ({base_model})...")
+        self.tokenizer = AutoTokenizer.from_pretrained(adapter_dir)  # tokenizer saved with adapter has the chat template
+        base = AutoModelForCausalLM.from_pretrained(base_model)
+
+        print(f"Loading LoRA adapter from {adapter_dir}...")
+        self.model = PeftModel.from_pretrained(base, adapter_dir)
+        self.model.eval()
+
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.model.to(self.device)
+        print(f"Model ready on device: {self.device}")
+        
