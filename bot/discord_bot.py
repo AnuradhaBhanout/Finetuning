@@ -29,4 +29,20 @@ class DialogueModel:
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.model.to(self.device)
         print(f"Model ready on device: {self.device}")
+
+    def generate(self, character, situation, max_new_tokens=80, temperature=0.8):
+        prompt = build_prompt(self.tokenizer, character, situation)
+        inputs = self.tokenizer(prompt, return_tensors="pt").to(self.device)
+
+        with torch.no_grad():
+            output = self.model.generate(
+                **inputs,
+                max_new_tokens=max_new_tokens,
+                do_sample=True,
+                temperature=temperature,
+                top_p=0.9,
+                repetition_penalty=1.3,
+                no_repeat_ngram_size=3,
+                pad_token_id=self.tokenizer.eos_token_id,
+            )
         
