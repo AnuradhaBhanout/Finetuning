@@ -46,7 +46,7 @@ def main():
     parser = argparse.ArgumentParser(description="Generate sample NPC dialogue from the fine-tuned model.")
     parser.add_argument("--adapter_dir", required=True, help="Path to the saved LoRA adapter (the 'final' folder).")
     parser.add_argument("--base_model", default="Qwen/Qwen2.5-1.5B-Instruct")#"gpt2")
-    parser.add_argument("--max_new_tokens", type=int, default=40)
+    parser.add_argument("--max_new_tokens", type=int, default=80)
     parser.add_argument("--num_samples", type=int, default=2, help="Generations per prompt, to see variety.")
     parser.add_argument("--temperature", type=float, default=0.8)
     args = parser.parse_args()
