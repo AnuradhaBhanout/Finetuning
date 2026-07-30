@@ -84,7 +84,7 @@ def section_for_position(pos, section_bounds):
     current = "General"
     for start, name in section_bounds:
         if start <= pos:
-            current = name
+            current =clean_wikitext_fragment(name) #name
         else:
             break
     return current
@@ -207,6 +207,7 @@ def main():
     if total_entries == 0:
         print("WARNING: No dialogue extracted. Inspect the debug wikitext output "
               "and adjust the regex patterns before scaling up.")
+
 
 
 if __name__ == "__main__":
