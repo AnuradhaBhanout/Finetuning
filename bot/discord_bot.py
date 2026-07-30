@@ -51,4 +51,11 @@ class DialogueModel:
         completion_ids = output[0][input_length:]
         return self.tokenizer.decode(completion_ids, skip_special_tokens=True).strip()
 
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Run the Skyrim NPC dialogue Discord bot.")
+    parser.add_argument("--adapter_dir", required=True, help="Path to the saved LoRA adapter ('final' folder).")
+    parser.add_argument("--base_model", default="Qwen/Qwen2.5-1.5B-Instruct")
+    args = parser.parse_args()
         
