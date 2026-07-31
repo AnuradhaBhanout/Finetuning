@@ -28,4 +28,5 @@ def main():
     model = PeftModel.from_pretrained(base_model, args.adapter_dir)
 
 
-   
+    print("Merging adapter into base weights...")
+    merged_model = model.merge_and_unload()
