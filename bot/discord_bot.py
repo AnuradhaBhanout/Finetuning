@@ -71,3 +71,36 @@ def main():
     intents = discord.Intents.default()
     client = discord.Client(intents=intents)
     tree = app_commands.CommandTree(client)
+
+    @client.event
+    async def on_ready():
+        await tree.sync()
+        print(f"Logged in as {client.user}. Slash commands synced.")
+
+    @tree.command(name="npc", description="Generate Skyrim NPC dialogue")
+    @app_commands.describe(
+        character="Who is speaking, e.g. 'Belethor' or 'A bandit'",
+        situation="What's happening, e.g. 'Greeting a customer'",
+    )
+
+    async def npc(interaction: discord.Interaction, character: str, situation: str):
+        await interaction.response.defer()
+        try:
+            line = dialogue_model.generate(character,situation)
+            if not line:
+                line = "(NPC has nothing to say)"
+            embed = discord.Embed(
+                title=character,
+                description=f'*"{line}"*',
+                color=discord.Color.dark_gold(),
+
+            )
+            embed.set_footer(text=situation)
+            await interaction.followup.send(embed=embed)
+        except Exception as e:
+            await interaction.followup.send(f"Something went wrong generating that line: {e}")
+
+    client.run(token)
+
+if __name__ =="__main__":
+    main()
