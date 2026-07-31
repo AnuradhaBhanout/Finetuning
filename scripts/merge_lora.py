@@ -30,3 +30,7 @@ def main():
 
     print("Merging adapter into base weights...")
     merged_model = model.merge_and_unload()
+
+    print(f"Saving merged model to: {args.output_dir}")
+    merged_model.save_pretrained(args.output_dir, safe_serialization=True)
+    tokenizer.save_pretrained(args.output_dir)
