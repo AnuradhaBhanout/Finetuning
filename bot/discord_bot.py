@@ -1,10 +1,12 @@
 import argparse
 import os
+
 import discord
 from discord import app_commands
 import torch
-from transformers import AutoModelForCausalLM,AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
+
 
 def build_prompt(tokenizer, character, situation):
     messages = [
@@ -46,11 +48,10 @@ class DialogueModel:
                 pad_token_id=self.tokenizer.eos_token_id,
             )
 
-        # Slice by token position (not string length)
+        # Slice by token position (not string length) — see generate.py fix
         input_length = inputs["input_ids"].shape[1]
         completion_ids = output[0][input_length:]
         return self.tokenizer.decode(completion_ids, skip_special_tokens=True).strip()
-
 
 
 def main():
@@ -67,7 +68,7 @@ def main():
         )
 
     dialogue_model = DialogueModel(args.adapter_dir, args.base_model)
-        
+
     intents = discord.Intents.default()
     client = discord.Client(intents=intents)
     tree = app_commands.CommandTree(client)
@@ -82,18 +83,16 @@ def main():
         character="Who is speaking, e.g. 'Belethor' or 'A bandit'",
         situation="What's happening, e.g. 'Greeting a customer'",
     )
-
     async def npc(interaction: discord.Interaction, character: str, situation: str):
         await interaction.response.defer()
         try:
-            line = dialogue_model.generate(character,situation)
+            line = dialogue_model.generate(character, situation)
             if not line:
-                line = "(NPC has nothing to say)"
+                line = "(the NPC has nothing to say)"
             embed = discord.Embed(
                 title=character,
                 description=f'*"{line}"*',
                 color=discord.Color.dark_gold(),
-
             )
             embed.set_footer(text=situation)
             await interaction.followup.send(embed=embed)
@@ -102,5 +101,6 @@ def main():
 
     client.run(token)
 
-if __name__ =="__main__":
+
+if __name__ == "__main__":
     main()
