@@ -34,3 +34,11 @@ def main():
     print(f"Saving merged model to: {args.output_dir}")
     merged_model.save_pretrained(args.output_dir, safe_serialization=True)
     tokenizer.save_pretrained(args.output_dir)
+
+    print("\nDone. This folder is now a normal, standalone Qwen2.5-1.5B model")
+    print("(no adapter needed at load time) — ready for GGUF conversion.")
+
+
+
+if __name__ == "__main__":
+    main()
