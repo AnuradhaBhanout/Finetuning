@@ -28,3 +28,21 @@ class DialogueModel:
             verbose=False,
         )
         print("Model ready.")
+
+    def generate(self, character, situation, max_tokens=80, temperature=0.8):
+
+        messages = [
+            {"role": "system", "content": SYSTEM_TEMPLATE.format(character=character)},
+            {"role": "user", "content": f"[Situation: {situation}]"},
+        ]
+
+        response = self.llm.create_chat_completion(
+            messages=messages,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            top_p=0.9,
+            repeat_penalty=1.3,     # same intent as transformers' repetition_penalty
+            frequency_penalty=0.3,  # closest llama.cpp equivalent to no_repeat_ngram_size
+        )
+
+        return response["choices"][0]["message"]["content"].strip()
