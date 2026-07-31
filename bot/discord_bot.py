@@ -68,3 +68,6 @@ def main():
 
     dialogue_model = DialogueModel(args.adapter_dir, args.base_model)
         
+    intents = discord.Intents.default()
+    client = discord.Client(intents=intents)
+    tree = app_commands.CommandTree(client)
