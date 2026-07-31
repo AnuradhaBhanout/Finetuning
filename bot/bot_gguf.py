@@ -13,3 +13,18 @@ SYSTEM_TEMPLATE = (
     "character. Respond the way {character} would actually speak — in tone, "
     "vocabulary, and attitude — in one or two short lines."
 )
+
+
+class DialogueModel:
+    """Wraps the quantized GGUF model, loaded once at startup."""
+ 
+    def __init__(self, model_path, n_ctx=2048, n_threads=None):
+        print(f"Loading GGUF model from: {model_path}")
+
+        self.llm = Llama(
+            model_path=model_path,
+            n_ctx=n_ctx,       # context window; small since prompts here are short
+            n_threads=n_threads,
+            verbose=False,
+        )
+        print("Model ready.")
