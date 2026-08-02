@@ -1,20 +1,7 @@
 """
 bot.py — Discord bot that generates Skyrim NPC dialogue on demand.
 
-Slash command:
-    /npc character:<name> situation:<short description>
-
-Setup:
-  1. Download your adapter folder from Drive to your local machine, e.g.:
-       C:\\Users\\anura\\AI\\Projects\\Finetuning\\checkpoints\\gpt2-skyrim-lora\\final
-  2. Create a Discord bot application at https://discord.com/developers/applications
-     - Bot tab -> Reset Token -> copy it
-     - Bot tab -> enable nothing special needed for slash commands (no privileged intents required)
-     - OAuth2 -> URL Generator -> scopes: "bot" + "applications.commands" -> invite to your server
-  3. Set your token as an environment variable (don't hardcode it):
-       PowerShell:  $env:DISCORD_BOT_TOKEN = "your-token-here"
-  4. Run:
-       python bot.py --adapter_dir "C:\\path\\to\\checkpoints\\gpt2-skyrim-lora\\final"
+gpt2-skyrim-lora
 """
 
 import argparse
