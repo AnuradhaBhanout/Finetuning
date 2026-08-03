@@ -52,7 +52,7 @@ def main():
     parser = argparse.ArgumentParser(description="Run the Skyrim NPC dialogue Discord bot (GGUF/CPU).")
     parser.add_argument("--model_path", required=True, help="Path to the quantized .gguf file.")
     parser.add_argument("--n_ctx", type=int, default=512)
-    parser.add_argument("--n_threads", type=int, default=None)
+    parser.add_argument("--n_threads", type=int, default=1)
     args = parser.parse_args()
 
     token = os.environ.get("DISCORD_BOT_TOKEN")
