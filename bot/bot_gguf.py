@@ -18,7 +18,7 @@ SYSTEM_TEMPLATE = (
 class DialogueModel:
     """Wraps the quantized GGUF model, loaded once at startup."""
  
-    def __init__(self, model_path, n_ctx=2048, n_threads=None):
+    def __init__(self, model_path, n_ctx=1024, n_threads=None):
         print(f"Loading GGUF model from: {model_path}")
 
         self.llm = Llama(
