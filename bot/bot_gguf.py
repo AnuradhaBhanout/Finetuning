@@ -18,7 +18,7 @@ SYSTEM_TEMPLATE = (
 class DialogueModel:
     """Wraps the quantized GGUF model, loaded once at startup."""
  
-    def __init__(self, model_path, n_ctx=1024, n_threads=None):
+    def __init__(self, model_path, n_ctx=2048, n_threads=None):
         print(f"Loading GGUF model from: {model_path}")
 
         self.llm = Llama(
@@ -52,7 +52,7 @@ def main():
     parser = argparse.ArgumentParser(description="Run the Skyrim NPC dialogue Discord bot (GGUF/CPU).")
     parser.add_argument("--model_path", required=True, help="Path to the quantized .gguf file.")
     parser.add_argument("--n_ctx", type=int, default=512)
-    parser.add_argument("--n_threads", type=int, default=1)
+    parser.add_argument("--n_threads", type=int, default=2)
     args = parser.parse_args()
 
     token = os.environ.get("DISCORD_BOT_TOKEN")
