@@ -1,104 +1,50 @@
-# Skyrim NPC Dialogue Generator
+# SkyrimNPCBot
 
-A LoRA fine-tuned GPT-2 model that generates in-character Skyrim NPC dialogue on demand, deployed as a Discord bot. Built end-to-end over a weekend: data scraping, cleaning, fine-tuning, evaluation, and deployment.
+A Discord bot that generates in-character Skyrim NPC dialogue. Type `/npc character:Belethor situation:Greeting a customer` and get a line back that (usually) sounds like Belethor.
 
-**Live in Discord:**
+I built this as a portfolio project after a year of self-studying AI/ML, coming from five years in Unreal Engine and VR game development. The real goal underneath it: figure out whether small, cheap fine-tunes can hold a character's voice well enough to be useful, since that's the foundation for a longer-term idea I have about AI-driven NPCs in location-based VR arcades. This project is the "can I even get the basics right" step before that.
 
-> **/npc** `character: Belethor` `situation: Greeting a customer entering his shop`
-> **Belethor**: *"I'm here to make some tea."*
+## What it does
 
-## Why this project
-
-Fine-tuning is often demoed on toy datasets with pre-cleaned inputs. This project instead starts from raw wiki markup on a public game wiki, builds a real scraping + cleaning pipeline, and ships the result as something interactive — a Discord bot anyone in a server can talk to.
-
-## Pipeline
+You give it a character name and a short situation. It returns one or two lines of dialogue in that character's voice, styled like Skyrim's in-game barks.
 
 ```
-discover_pages.py   ─▶  finds all NPC page titles via the wiki category API
-        │
-        ▼
-scrape.py            ─▶  pulls raw wikitext, extracts dialogue with two regex patterns
-        │
-        ▼
-format_data.py        ─▶  filters, dedupes, formats into a prompt template, splits train/val/test
-        │
-        ▼
-train.py (Colab, T4)  ─▶  LoRA fine-tune of GPT-2 via trl's SFTTrainer
-        │
-        ▼
-generate.py / generate_base.py  ─▶  inference + before/after comparison
-        │
-        ▼
-bot.py                 ─▶  Discord slash-command bot serving the fine-tuned model
+/npc character:Bandit situation:Threatening the player on the road
+> "Money or your life, traveler. I won't ask twice."
 ```
 
-## Data
+## How it's built
 
-- **Source**: [Elder Scrolls Fandom wiki](https://elderscrolls.fandom.com), via the MediaWiki API (`action=parse&prop=wikitext`) rather than rendered HTML — dialogue on this wiki lives inside JS-collapsible sections that don't appear in plain HTML scrapes.
-- **Two dialogue patterns** required distinct extraction logic:
-  - `{{AudioQuote|dialogue|speaker|...}}` — single attributed lines
-  - `'''Speaker:''' ''"dialogue text"''` — multi-turn conversation blocks
-- **Discovery**: walked `Category:Skyrim: Characters` to auto-collect 1,168 NPC page titles rather than hand-picking characters.
-- **Result**: 8,304 raw extracted lines → 4,357 examples after filtering (player-voiced lines removed, deduped, length-filtered to 3–60 words) → split 90/5/5 into train/val/test.
+**Data.** I scraped NPC dialogue from the Elder Scrolls Fandom wiki using the MediaWiki API's raw wikitext endpoint, not the rendered HTML, because dialogue lives inside templates that don't come through cleanly as plain text. Ended up with about 4,357 examples across 1,168 NPC pages after filtering and deduplication.
 
-## Model & training
+**Model.** I started with GPT-2 (124M parameters) because it was cheap to iterate on. It didn't work. More training data per character didn't help, and the eval loss stayed stubbornly high with no overfitting signal, which told me this wasn't a data problem. It was a capacity problem: the model was too small to hold anything beyond a shallow imitation. I switched to Qwen2.5-1.5B-Instruct (Apache 2.0 license, decent small-model benchmarks) and trained a LoRA adapter on top of it instead of the full model. Three epochs on a Colab T4, about 38 minutes. Perplexity dropped from 61.4 on the base model to 2.44 after fine-tuning.
 
-| Choice | Value | Why |
-|---|---|---|
-| Base model | GPT-2 small (124M) | Fits fully in a T4's memory at fp16 — no need for 4-bit quantization |
-| Method | LoRA (not QLoRA) | QLoRA's quantization overhead buys memory savings this model doesn't need; LoRA alone already gives a small, portable adapter |
-| Target modules | `c_attn` | GPT-2's combined QKV projection |
-| Rank / alpha | r=8, alpha=16 | Standard small-adapter defaults (alpha = 2×r) |
-| Trainer | `SFTTrainer` (trl) | Handles the causal-LM SFT loop, masking, and eval out of the box |
-| Epochs | 3 | ~5.5 minutes on a T4 |
+**The wikitext bug.** About three months into the project I noticed roughly 8% of my training examples still had raw `[[link|display]]` markup sitting in them, unescaped. Traced it to two separate bugs in the scraper: one regex that missed a malformed link pattern, and a section-header function that never ran the cleaning step at all. Fixed both, reran the whole scrape, retrained. This is the kind of bug that's easy to miss because the model still trains and still produces plausible-looking output; it just quietly degrades quality in a way you won't catch unless you go looking.
 
-**Prompt format** (also what the Discord bot constructs at inference time):
-```
-### Character: Belethor
-### Situation: Greeting a customer entering his shop
-### Dialogue: <the model completes here><|endoftext|>
-```
+**Deployment, round one.** I put the bot on an EC2 t3.micro (free tier) running the model quantized to GGUF via llama.cpp, since the free-tier box has no GPU and barely enough RAM. It worked, but a single Discord response took four to five minutes. Technically functional. Not something you'd actually want to use.
 
-## Results
+**Deployment, round two.** I moved inference to a serverless GPU endpoint on RunPod (vLLM, a 24GB card, pay-per-second). The Discord bot itself stayed on the free EC2 box, but now it just makes an HTTP call instead of loading the model locally. Cold start on an idle worker is around a minute and a half; once it's warm, generation takes two to three seconds. That's the difference between "cute prototype" and "something you'd put in an actual Discord server."
 
-Training loss dropped from **4.71 → 2.94**; eval loss from **2.86 → 2.63**, improving at every checkpoint with no sign of overfitting in this 3-epoch run. Token-level accuracy rose from **0.28 → 0.53**.
+**A bug I didn't expect.** After switching to the GPU endpoint, I noticed the model would occasionally repeat itself across unrelated requests — one NPC's line would bleed into another's, or a response would spiral into repeating the same word over and over. Turned out my new request payload wasn't passing `repetition_penalty`, `top_p`, or `max_tokens` the way my original CPU-based generation script had. The GPU endpoint was silently falling back to more permissive defaults. Once I added those parameters back explicitly, the repetition problem went away. It's a good reminder that swapping infrastructure can silently drop behavior you'd built and tested for, even when the model itself hasn't changed at all.
 
-### Before vs. after fine-tuning
+## What works and what doesn't
 
-Same prompt, same decoding settings — the only difference is the LoRA adapter.
+Most characters land well. Guards sound like guards, merchants haggle like merchants, and a Legate barking orders to crush a rebellion reads like something that could genuinely be in the game.
 
-**Prompt:** `Character: Belethor / Situation: Greeting a customer entering his shop`
+It's not perfect. Brynjolf, specifically, tends to come out flat and a little incoherent regardless of the situation I give him — I suspect his training examples skewed toward a narrower emotional range than other characters. And every so often, especially on characters I'd call "morally complicated" like bandits, the model swerves into an apologetic, RLHF-flavored register that has nothing to do with Skyrim. My guess is that Qwen's instruction-tuning baked in a lot of "be nice and cooperative" behavior, and a LoRA adapter this size (rank 8, about 4,000 training examples) doesn't have enough weight to fully override that on every single generation. I looked into fixing this properly and decided it wasn't worth the effort for what this project is; I'm noting it here instead of hiding it.
 
-| Base GPT-2 | Fine-tuned |
-|---|---|
-| *"The protagonist asks the girl if she can buy him some of her clothes... they talk about what happened at"* | *"I thought I was going to give you a good deal on something."* |
+## Cost and infrastructure notes
 
-**Prompt:** `Character: A guard / Situation: Warning a stranger to watch their step`
-
-| Base GPT-2 | Fine-tuned |
-|---|---|
-| *"None. A man with the long black hair and glasses is sitting next, wearing an outfit he calls 'The Black Man'..."* | *"I'll give you the dagger."* |
-
-Base GPT-2 doesn't recognize the prompt template at all — it treats `### Character:` as literal text, invents unrelated fields, and drifts into generic forum/fanfiction-style rambling. The fine-tuned model reliably stays in the structured format, stays on-topic for the given situation, and produces a distinct tone per character (shopkeeper pitches from Belethor, menace from bandits, warmth from innkeepers).
-
-One early issue — repetition loops (e.g. *"I'm not going to lie. I'm not going to lie."*) — was fixed via decoding parameters (`repetition_penalty=1.3`, `no_repeat_ngram_size=3`) rather than retraining, since it was a decoding-time failure mode, not a training one.
-
-## Deployment
-
-Packaged as a Discord bot (`bot.py`) using `discord.py`'s slash command interface:
-
-```
-/npc character:<name> situation:<short description>
-```
-
-The model loads once at startup and stays resident in memory, so each `/npc` call only pays the generation cost, not a reload. Runs on CPU locally (no GPU required for inference at this model size).
+The EC2 box is free tier and stays that way regardless of how the model is deployed. The RunPod GPU endpoint only charges while a worker is actually running, and scales to zero when idle, so for a low-traffic Discord bot the actual monthly cost is close to nothing. If traffic ever grew enough that cold starts became a real problem, the next lever would be keeping a worker warm intentionally, which trades a small ongoing cost for consistently fast responses.
 
 ## Stack
 
-Python · Hugging Face `transformers`, `peft`, `trl`, `datasets` · PyTorch · Google Colab (T4, training) · `discord.py` · MediaWiki API
+- **Data**: MediaWiki API, Python, regex-based wikitext cleaning
+- **Training**: HuggingFace `transformers`/`peft`/`trl`, PyTorch, Google Colab (T4)
+- **Model**: Qwen2.5-1.5B-Instruct + LoRA adapter (r=8)
+- **Serving**: vLLM on RunPod serverless (GPU), llama.cpp/GGUF as a CPU fallback path
+- **Bot**: `discord.py`, deployed as a systemd service on AWS EC2 (t3.micro, free tier)
 
-## Limitations & future work
+## What I'd do differently next time
 
-- Single-game dataset (Skyrim only) — kept deliberately scoped rather than risking style bleed from mixing franchises; a `### Game:` field in the prompt template would be the clean way to extend to multiple games later.
-- Small base model (124M) — dialogue is coherent but generic in places; a larger base model or more training data would likely improve character distinctiveness further.
-- CPU inference is functional but not fast; a hosted GPU endpoint would be the next step for a public-facing deployment.
+I'd add the sampling parameters and evaluation harness before the first deployment, not after chasing a bug in production. And I'd budget time upfront for the model-capacity question instead of discovering it after weeks of trying to fix GPT-2 with more data. In hindsight, the underfitting signal was there early: high loss, no overfitting gap, no improvement from adding examples. I just didn't recognize the pattern yet.
