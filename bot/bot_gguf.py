@@ -6,18 +6,18 @@ import os
 import asyncio
 import discord
 from discord import app_commands
-from llama_cpp import Llama
+#from llama_cpp import Llama
 import requests
 import os
 
 RUNPOD_ENDPOINT = "https://api.runpod.ai/v2/yoqtj8dg12gscn/runsync"
 RUNPOD_API_KEY = os.environ.get("RUNPOD_API_KEY")
 
-SYSTEM_TEMPLATE = (
-    "You are {character}, an NPC in The Elder Scrolls V: Skyrim. Stay fully in "
-    "character. Respond the way {character} would actually speak — in tone, "
-    "vocabulary, and attitude — in one or two short lines."
-)
+# SYSTEM_TEMPLATE = (
+#     "You are {character}, an NPC in The Elder Scrolls V: Skyrim. Stay fully in "
+#     "character. Respond the way {character} would actually speak — in tone, "
+#     "vocabulary, and attitude — in one or two short lines."
+# )
 
 def generate(character, situation):
     payload = {
@@ -113,7 +113,7 @@ def main():
             line = await loop.run_in_executor(
                 None, generate, character, situation
             )
-            
+
             if not line:
                 line = "(the NPC has nothing to say)"
             embed = discord.Embed(
