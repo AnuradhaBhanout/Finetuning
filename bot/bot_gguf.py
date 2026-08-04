@@ -7,6 +7,11 @@ import asyncio
 import discord
 from discord import app_commands
 from llama_cpp import Llama
+import requests
+import os
+
+RUNPOD_ENDPOINT = "https://api.runpod.ai/v2/yoqtj8dg12gscn/runsync"
+RUNPOD_API_KEY = os.environ.get("RUNPOD_API_KEY")
 
 SYSTEM_TEMPLATE = (
     "You are {character}, an NPC in The Elder Scrolls V: Skyrim. Stay fully in "
@@ -14,38 +19,54 @@ SYSTEM_TEMPLATE = (
     "vocabulary, and attitude — in one or two short lines."
 )
 
+def generate(character, situation):
+    payload = {
+        "input": {
+            "messages": [
+                {"role": "system", "content": f"You are {character}, an NPC in The Elder Scrolls V: Skyrim. Stay fully in character. Respond the way {character} would actually speak — in tone, vocabulary, and attitude — in one or two short lines."},
+                {"role": "user", "content": f"[Situation: {situation}]"}
+            ]
+        }
+    }
+    headers = {"Authorization": f"Bearer {RUNPOD_API_KEY}"}
+    resp = requests.post(RUNPOD_ENDPOINT, json=payload, headers=headers, timeout=120)
+    resp.raise_for_status()
+    data = resp.json()
+    return data["output"][0]["choices"][0]["tokens"][0].strip()
 
-class DialogueModel:
-    """Wraps the quantized GGUF model, loaded once at startup."""
+
+
+# class DialogueModel:
+#     """Wraps the quantized GGUF model, loaded once at startup."""
  
-    def __init__(self, model_path, n_ctx=1024, n_threads=None):
-        print(f"Loading GGUF model from: {model_path}")
+#     def __init__(self, model_path, n_ctx=1024, n_threads=None):
+#         print(f"Loading GGUF model from: {model_path}")
 
-        self.llm = Llama(
-            model_path=model_path,
-            n_ctx=n_ctx,       # context window; small since prompts here are short
-            n_threads=n_threads,
-            verbose=False,
-        )
-        print("Model ready.")
+#         self.llm = Llama(
+#             model_path=model_path,
+#             n_ctx=n_ctx,       # context window; small since prompts here are short
+#             n_threads=n_threads,
+#             verbose=False,
+#         )
+#         print("Model ready.")
 
-    def generate(self, character, situation, max_tokens=280, temperature=0.8):
+#     def generate(self, character, situation, max_tokens=280, temperature=0.8):
 
-        messages = [
-            {"role": "system", "content": SYSTEM_TEMPLATE.format(character=character)},
-            {"role": "user", "content": f"[Situation: {situation}]"},
-        ]
+#         messages = [
+#             {"role": "system", "content": SYSTEM_TEMPLATE.format(character=character)},
+#             {"role": "user", "content": f"[Situation: {situation}]"},
+#         ]
 
-        response = self.llm.create_chat_completion(
-            messages=messages,
-            max_tokens=max_tokens,
-            temperature=temperature,
-            top_p=0.9,
-            repeat_penalty=1.3,     # same intent as transformers' repetition_penalty
-            frequency_penalty=0.3,  # closest llama.cpp equivalent to no_repeat_ngram_size
-        )
+#         response = self.llm.create_chat_completion(
+#             messages=messages,
+#             max_tokens=max_tokens,
+#             temperature=temperature,
+#             top_p=0.9,
+#             repeat_penalty=1.3,     # same intent as transformers' repetition_penalty
+#             frequency_penalty=0.3,  # closest llama.cpp equivalent to no_repeat_ngram_size
+#         )
 
-        return response["choices"][0]["message"]["content"].strip()
+#         return response["choices"][0]["message"]["content"].strip()
 
 
 def main():
@@ -63,7 +84,7 @@ def main():
         )
 
 
-    dialogue_model = DialogueModel(args.model_path, n_ctx=args.n_ctx, n_threads=args.n_threads)
+    #dialogue_model = DialogueModel(args.model_path, n_ctx=args.n_ctx, n_threads=args.n_threads)
 
     intents = discord.Intents.default()
     client = discord.Client(intents=intents)
@@ -83,10 +104,16 @@ def main():
         await interaction.response.defer()
         try:
             #line = dialogue_model.generate(character, situation)
+            # loop = asyncio.get_running_loop()
+            # line = await loop.run_in_executor(
+            #     None, dialogue_model.generate, character, situation
+            # )
+
             loop = asyncio.get_running_loop()
             line = await loop.run_in_executor(
-                None, dialogue_model.generate, character, situation
+                None, generate, character, situation
             )
+            
             if not line:
                 line = "(the NPC has nothing to say)"
             embed = discord.Embed(
