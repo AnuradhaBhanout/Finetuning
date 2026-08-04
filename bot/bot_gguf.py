@@ -25,7 +25,13 @@ def generate(character, situation):
             "messages": [
                 {"role": "system", "content": f"You are {character}, an NPC in The Elder Scrolls V: Skyrim. Stay fully in character. Respond the way {character} would actually speak — in tone, vocabulary, and attitude — in one or two short lines."},
                 {"role": "user", "content": f"[Situation: {situation}]"}
-            ]
+            ],
+            "sampling_params": {
+                "temperature": 0.8,
+                "top_p": 0.9,
+                "repetition_penalty": 1.3,
+                "max_tokens": 80
+            }
         }
     }
     headers = {"Authorization": f"Bearer {RUNPOD_API_KEY}"}
