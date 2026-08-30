@@ -37,3 +37,24 @@ def generate(character:str,situation:str,model:str,seed:int)-> str:
     )
     resp.raise_for_status()
     return resp.json()["choices"][0]["text"].strip()
+
+
+def run(cases: list,label:str,model:str,samples:int) -> dict:
+    rows = []
+    for case in cases:
+        for s in range(samples):
+            text = generate(case["character"],case["situation"],model,seed=1000+s)
+            rows.append({
+                "id":case["id"],
+                "sample":s,
+                "character":case["character"],
+                "tags": case["tags"],
+                "output":text,
+                "leaked_markup":leaked_markup(text),
+                "refusal_register":refusal_register(text),
+                "max_3gram_repeat": max_ngram_repeat(text),
+                "length_ok":length_ok(text),
+                "chars": len(text),
+            })
+            print(f" {case['id']}[{s}] {text[:70]!r}")
+    return {"label": label, "model":model, "samples":samples, "rows":rows}
