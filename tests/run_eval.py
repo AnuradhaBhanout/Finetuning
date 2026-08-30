@@ -68,7 +68,7 @@ def summarize(result: dict)-> dict:
         return sum(r[key] for r in rows)/n
 
     def tag_rate(tag,key):
-        sub = [ r for r in rows if tag == r["tags"]]
+        sub = [ r for r in rows if tag in r["tags"]]
         return sum(r[key] for r in sub)/ len(sub) if sub else 0.0
 
     by_char = {}
@@ -127,7 +127,7 @@ def main():
     if args.selfcheck:
         selfcheck()
 
-    if args.compare:
+    elif args.compare:
         compare(*args.compare)
 
     else:
