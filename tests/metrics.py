@@ -40,7 +40,7 @@ def distinct_n(texts: list,n:int =2)-> float:
     for t in texts:
         words = t.lower().split()
         grams += [tuple(words[i:i+n]) for i in range(len(words)-n+1)]
-        return len(set(grams))/len(grams) if grams else 0
+    return len(set(grams))/len(grams) if grams else 0
 
 
 def selfcheck():
