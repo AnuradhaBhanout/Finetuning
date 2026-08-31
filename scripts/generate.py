@@ -28,10 +28,7 @@ TEST_PROMPTS = [
 ]
 
 
-# def build_prompt(character, situation):
-#     # Matches format_data.py's template, but cut off after "### Dialogue:"
-#     # so the model has to complete it.
-#     return f"### Character: {character}\n### Situation: {situation}\n### Dialogue:"
+
 
 #qwen prompt
 def build_prompt(tokenizer, character, situation):
@@ -45,7 +42,7 @@ def build_prompt(tokenizer, character, situation):
 def main():
     parser = argparse.ArgumentParser(description="Generate sample NPC dialogue from the fine-tuned model.")
     parser.add_argument("--adapter_dir", required=True, help="Path to the saved LoRA adapter (the 'final' folder).")
-    parser.add_argument("--base_model", default="Qwen/Qwen2.5-1.5B-Instruct")#"gpt2")
+    parser.add_argument("--base_model", default="Qwen/Qwen2.5-1.5B-Instruct")
     parser.add_argument("--max_new_tokens", type=int, default=80)
     parser.add_argument("--num_samples", type=int, default=2, help="Generations per prompt, to see variety.")
     parser.add_argument("--temperature", type=float, default=0.8)
@@ -85,9 +82,7 @@ def main():
                     no_repeat_ngram_size=3,   # hard-blocks any 3-word phrase from repeating verbatim
                     pad_token_id=tokenizer.eos_token_id,
                 )
-            # generated = tokenizer.decode(output[0], skip_special_tokens=True)
-            # # Only print what came after the prompt, for readability
-            # completion = generated[len(prompt):].strip()
+
 
             input_length = inputs["input_ids"].shape[1]
             completion_ids = output[0][input_length:]
