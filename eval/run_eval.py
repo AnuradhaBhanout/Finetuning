@@ -76,8 +76,8 @@ def summarize(result: dict)-> dict:
     def tag_rate(tag,key):
         sub = [ r for r in rows if tag in r["tags"]]
         return sum(r[key] for r in sub)/ len(sub) if sub else 0.0
-    degenerate= [ r for r in rows if r["mean_3gram_repeat"] > DEGENERATE_REPEAT_THRESHOLD]
-    clean= [ r for r in rows if  r["mean_3gram_repeat"] <= DEGENERATE_REPEAT_THRESHOLD]
+    degenerate= [ r for r in rows if r["max_3gram_repeat"] > DEGENERATE_REPEAT_THRESHOLD]
+    clean= [ r for r in rows if  r["max_3gram_repeat"] <= DEGENERATE_REPEAT_THRESHOLD]
     by_char = {}
     for r in rows:
         by_char.setdefault(r["character"],[]).append(r["output"])
