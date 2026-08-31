@@ -20,9 +20,7 @@ Thumbs.db
 
 
 # Data & checkpoints
-data/raw/
-data/processed/
-*.jsonl
+
 checkpoints/
 outputs/
 *.safetensors
