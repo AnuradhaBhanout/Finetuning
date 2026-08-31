@@ -79,7 +79,7 @@ def summarize(result: dict)-> dict:
         "n":n,
         "markup_leak_rate": rate("leaked_markup"),
         "refusal_rate": rate("refusal_register"),
-        "refusal_rate_morally_complicated": tag_rate("morally_complicated","refusal_register"),
+        "refusal_rate_morally_complicated": tag_rate("morally-complicated","refusal_register"),
         "length_ok_rate":rate("length_ok"),
         "mean_3gram_repeat": statistics.mean(r["max_3gram_repeat"] for r in rows),
         "worst_3gram_repeat": max(r["max_3gram_repeat"] for r in rows),
