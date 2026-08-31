@@ -1,7 +1,7 @@
 import re
 from collections import Counter
 
-
+DEGENERATE_REPEAT_THRESHOLD = 10
 MARKUP_RE = re.compile(r"\[\[|\]\]|\{\{|\}\}|<ref|'''|==|\|display")
 
 REFUSAL_MARKERS = [

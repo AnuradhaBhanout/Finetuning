@@ -4,10 +4,11 @@ import os
 import statistics
 import requests
 
-from metrics import refusal_register,length_ok,max_ngram_repeat,leaked_markup,distinct_n,selfcheck
+from metrics import refusal_register,length_ok,max_ngram_repeat,leaked_markup,distinct_n,selfcheck,DEGENERATE_REPEAT_THRESHOLD
 
-GEN_ENDPOINT = os.environ.get("GEN_ENDPOINT","http://localhost:8000/v1/completions")
-GEN_API_KEY = os.environ.get("GEN_API_KEY","")
+GEN_ENDPOINT = os.getenv("GEN_ENDPOINT")
+GEN_API_KEY = os.getenv("GEN_API_KEY")
+
 
 def build_prompt(character:str,situation:str)->str:
     return (
@@ -25,6 +26,7 @@ def generate(character:str,situation:str,model:str,seed:int)-> str:
         GEN_ENDPOINT,
         headers={"Authorization": f"Bearer {GEN_API_KEY}"} if GEN_API_KEY else {},
         json={
+            "input":{
             "model":model,
             "prompt": build_prompt(character,situation),
             "max_tokens":80,
@@ -32,11 +34,15 @@ def generate(character:str,situation:str,model:str,seed:int)-> str:
             "top_p":0.9,
             "repetition_penalty":1.3,
             "seed":seed,
+            }
         },
         timeout=120,
     )
     resp.raise_for_status()
-    return resp.json()["choices"][0]["text"].strip()
+#    return resp.json()["choices"][0]["text"].strip()
+    data = resp.json()
+   # print(json.dumps(data, indent=2)[:800])
+    return data["output"][0]["choices"][0]["tokens"][0].strip()
 
 
 def run(cases: list,label:str,model:str,samples:int) -> dict:
@@ -56,7 +62,7 @@ def run(cases: list,label:str,model:str,samples:int) -> dict:
                 "length_ok":length_ok(text),
                 "chars": len(text),
             })
-            print(f" {case['id']}[{s}] {text[:70]!r}")
+           # print(f" {case['id']}[{s}] {text[:70]!r}")
     return {"label": label, "model":model, "samples":samples, "rows":rows}
 
 
@@ -70,7 +76,8 @@ def summarize(result: dict)-> dict:
     def tag_rate(tag,key):
         sub = [ r for r in rows if tag in r["tags"]]
         return sum(r[key] for r in sub)/ len(sub) if sub else 0.0
-
+    degenerate= [ r for r in rows if r["mean_3gram_repeat"] > DEGENERATE_REPEAT_THRESHOLD]
+    clean= [ r for r in rows if  r["mean_3gram_repeat"] <= DEGENERATE_REPEAT_THRESHOLD]
     by_char = {}
     for r in rows:
         by_char.setdefault(r["character"],[]).append(r["output"])
@@ -82,6 +89,10 @@ def summarize(result: dict)-> dict:
         "refusal_rate_morally_complicated": tag_rate("morally-complicated","refusal_register"),
         "length_ok_rate":rate("length_ok"),
         "mean_3gram_repeat": statistics.mean(r["max_3gram_repeat"] for r in rows),
+        "mean_3gram_repeat_excl_degenerate": (statistics.mean(r["max_3gram_repeat"] for r in clean) if clean else 0),
+        "degenerate_count":len(degenerate),
+        "degenerate_rate":len(degenerate)/n,
+        "degenerate_ids":[f"{r['id']}[{r['sample']}]" for r in degenerate],
         "worst_3gram_repeat": max(r["max_3gram_repeat"] for r in rows),
         "mean_chars": statistics.mean(r["chars"] for r in rows),
         "diversity_distinct2_overall": distinct_n([r["output"] for r in rows], 2),
@@ -97,6 +108,10 @@ def print_summary(label: str, s: dict):
     print(f"    morally-complicated    {s['refusal_rate_morally_complicated']:.1%}")
     print(f"  length ok                {s['length_ok_rate']:.1%}   (want >95%)")
     print(f"  mean 3-gram repeat       {s['mean_3gram_repeat']:.2f}   (want ~1.0)")
+    print(f"    excl. degenerate rows  {s['mean_3gram_repeat_excl_degenerate']:.2f}")
+    print(f"  degenerate generations   {s['degenerate_count']} ({s['degenerate_rate']:.1%})")
+    if s["degenerate_ids"]:
+        print(f"    -> {', '.join(s['degenerate_ids'])}")
     print(f"  worst 3-gram repeat      {s['worst_3gram_repeat']}")
     print(f"  distinct-2 overall       {s['diversity_distinct2_overall']:.3f}")
     print("  least varied characters:")
@@ -108,7 +123,7 @@ def compare(a_path: str, b_path: str):
     sa, sb = summarize(a),summarize(b)
     print(f"\n{'metric':38s} {a['label']:>12s} {b['label']:>12s}   delta")
     for k in ("markup_leak_rate", "refusal_rate", "refusal_rate_morally_complicated",
-              "length_ok_rate", "mean_3gram_repeat", "diversity_distinct2_overall"):
+              "length_ok_rate",  "mean_3gram_repeat_excl_degenerate", "degenerate_rate", "diversity_distinct2_overall"):
         print(f"{k:38s} {sa[k]:12.3f} {sb[k]:12.3f}   {sb[k] - sa[k]:+.3f}")
 
 
