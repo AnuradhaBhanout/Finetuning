@@ -1,0 +1,78 @@
+<!--This article is not the place to express opinions on this character. If you wish to express opinions on this character, please feel free express them in the forums. Fan opinions posted here will be removed.-->
+{{SkyrimCharacters
+|image     = Nazeem2.png
+|race      = [[Redguards (Skyrim)|Redguard]]
+|gender    = Male
+|level     = 4
+|class     = Citizen
+|faction   = [[Whiterun (Skyrim)|Whiterun]]
+|rank      = 
+|services  = 
+|essential = No
+|respawn  = No
+|RefID     = {{ID|0001A6A4}}
+|Base ID   = {{ID|00013BBF}}
+}}
+{{Confuse|Nazaneen|Nahzhem}}
+'''Nazeem''' is a [[Redguards (Skyrim)|Redguard]] citizen in {{Skyrim}} who resides in the upstairs room of [[The Drunken Huntsman]]. He, along with his wife [[Ahlam]], owns [[Chillfurrow Farm]], which is located south of [[Whiterun (Skyrim)|Whiterun]].
+
+During waking hours, he visits the [[Whiterun Marketplace|marketplace]] and inspects the wares on display, while conversing with, and insulting, various merchants. In the afternoon, he wanders around town, and then finishes his day by sitting in The Drunken Huntsman. He also goes to bed there instead of Chillfurrow Farm.
+
+{{AudioQuote|Do you get to the Cloud District very often? Oh, what am I saying, of course you don't.|Nazeem|The Elder Scrolls V: Skyrim|TES5 nazeem.ogg}}
+He speaks in a condescending manner toward the [[Last Dragonborn|Dragonborn]] and the citizens of Whiterun, and claims to advise [[Balgruuf the Greater]] on political matters. Ironically, he has never actually visited [[Dragonsreach]] itself. The Jarl and, indeed, all of his court, never talk about him, nor is he ever present at the Thalmor Embassy at social parties.
+
+==Interactions==
+===[[Hired Muscle]]===
+Nazeem is a possible target for this radiant side quest for [[The Companions]]. Completing it requires beating him up in a [[Brawling|fistfight]] in order to teach him a lesson and remind him of his obligations.
+
+===[[Rescue Mission]]===
+He is a possible kidnapping target for this quest, and must be rescued from a radiant location.
+
+==Conversations==
+===Anoriath===
+<div class="blockquote">
+'''Nazeem:''' ''"Do you have anything even remotely fresh?"''
+'''Anoriath:''' ''"I can assure you, it's all fresh. I hunt the game myself, every day."''
+'''Nazeem:''' ''"Hmm. As you say."''
+'''Anoriath:''' ''"Maybe you'd like to try the horker? Or some beef?"''
+'''Nazeem:''' ''"You don't prepare the meat with any of those strange Elven spices, do you?"''
+'''Anoriath:''' ''"Ahhhh... No, no Elven spices; just some salt, to preserve it. You're not afraid of salt, are you?"''
+'''Nazeem:''' ''"I'm not 'afraid' of anything. I simply prefer quality merchandise. No, no this meat won't do at all. Too much fat, and it all smells... wrong."''
+'''Anoriath:''' ''"Suit yourself, then. The woods are that way. Outside the walls, walk straight ahead. Can't miss them. Good luck on your hunt."''
+'''Nazeem:''' ''"Good day."''
+</div>
+
+===Carlotta Valentia===
+<div class="blockquote">
+'''Nazeem:''' ''"These fruits and vegetables are disappointing, Carlotta."''
+'''Carlotta:''' ''"I get them fresh from the farms daily, Nazeem."''
+'''Nazeem:''' ''"If you were getting them from my farm, they'd be twice as fresh."''
+</div>
+
+===Ysolda===
+<div class="blockquote">
+'''Nazeem:''' ''"Ah, Ysolda was it? What brings you to the market?"''
+'''Ysolda:''' ''"I'm here to buy food, Nazeem. I suppose you don't need to worry about that."''
+'''Nazeem:''' ''"Owning a farm does have its advantages."''
+</div>
+
+==Quotes==
+*''"Oh, it took years, but I earned my way to the top. I own Chillfurrow Farm, you see. Very successful business. Obviously."''
+*''"I actually advise the Jarl on political matters. My input is invaluable, of course. But this is all probably a bit over your head."''
+
+==Trivia==
+*Nazeem holds the key to Chillfurrow Farm, as well as a key to Wintersand Manor, which seems to serve no known purpose. Entering <code>help wintersand 0</code> into the console (PC) shows that there is a Wintersand Manor Key, a location called Wintersand Manor and a Wintersand Manor Faction, but no Wintersand Manor cell, implying that Wintersand Manor may be a location which was removed from the final release, but the key was overlooked.
+*Although he owns Chillfurrow Farm, he is never there in-game.
+*He is voiced by Keith Silverstein.
+*He does not count as a "High Profile Victim" in {{Dawnguard}} quest "[[Deceiving the Herd]]."
+
+==Appearances==
+*{{Skyrim}}
+
+<!--Interwiki links-->
+[[de:Nazeem]]
+[[es:Nazeem]]
+[[fr:Nazeem]]
+[[pl:Nazeem]]
+[[ru:Назим]]
+[[Category:Skyrim: Whiterun Characters]]

@@ -1,0 +1,13 @@
+{{expand list|Skyrim}}
+{{For|2=Generic Dialogue}}
+'''Generic Dialogue''' is dialogue which is not unique to any specific [[Characters (Skyrim)|character]] in {{Skyrim}}. The following is a list of generic dialogue, sorted by type.
+
+==Generic Dialogue Quests==
+{{Missing|Skyrim}}
+
+==Misc Generic Dialogue==
+{{Missing|Skyrim}}
+
+{{Stub|Skyrim|Character}}
+[[Category:Skyrim: Gameplay]]
+[[Category:Skyrim: Lists]]
