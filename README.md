@@ -2,7 +2,11 @@
 
 A Discord bot that generates in-character Skyrim NPC dialogue. Type `/npc character:Belethor situation:Greeting a customer` and get a line back that (usually) sounds like Belethor.
 
-I built this as a portfolio project after a year of self-studying AI/ML, coming from five years in Unreal Engine and VR game development. The real goal underneath it: figure out whether small, cheap fine-tunes can hold a character's voice well enough to be useful, since that's the foundation for a longer-term idea I have about AI-driven NPCs in location-based VR arcades. This project is the "can I even get the basics right" step before that.
+**At a glance**
+- Qwen2.5-1.5B-Instruct + LoRA adapter (r=8), fine-tuned on 4,357 scraped NPC lines
+- Served via vLLM on RunPod serverless, warm response in 2 to 3 seconds
+- Evaluated head to head against the base model on a 40-case harness: refusal-register dropped 0.8% to 0%, repetition and diversity statistically flat, one isolated failure mode found and documented
+- Built after a year of self-studying AI/ML, coming from five years in Unreal Engine and VR game development
 
 ## What it does
 
@@ -16,38 +20,47 @@ You give it a character name and a short situation. It returns one or two lines 
 ![Belethor and Kodlak responding in character](assets/demo-1.png)
 ![Thalmor Justiciar and Bandit Chief responding in character](assets/demo-2.png)
 
+## Why I built this
+
+The real goal underneath it: figure out whether small, cheap fine-tunes can hold a character's voice well enough to be useful, since that's the foundation for a longer-term idea I have about AI-driven NPCs in location-based VR arcades. This project is the "can I even get the basics right" step before that.
+
 ## How it's built
 
-**Data.** I scraped NPC dialogue from the Elder Scrolls Fandom wiki using the MediaWiki API's raw wikitext endpoint, not the rendered HTML, because dialogue lives inside templates that don't come through cleanly as plain text. Ended up with about 4,357 examples across 1,168 NPC pages after filtering and deduplication.
+**Data.** Scraped from the Elder Scrolls Fandom wiki via the MediaWiki API's raw wikitext endpoint, not rendered HTML, since dialogue lives inside templates that don't come through cleanly as plain text. 4,357 examples across 1,168 NPC pages after filtering and dedup.
 
-**Model.** I started with GPT-2 (124M parameters) because it was cheap to iterate on. It didn't work. More training data per character didn't help, and the eval loss stayed stubbornly high with no overfitting signal, which told me this wasn't a data problem. It was a capacity problem: the model was too small to hold anything beyond a shallow imitation. I switched to Qwen2.5-1.5B-Instruct (Apache 2.0 license, decent small-model benchmarks) and trained a LoRA adapter on top of it instead of the full model. Three epochs on a Colab T4, about 38 minutes. Perplexity dropped from 61.4 on the base model to 2.44 after fine-tuning, though perplexity alone doesn't tell you much since the model is scored on the same distribution it was trained on. See Evaluation below for the numbers that actually mattered.
+**Model.** Started with GPT-2 (124M). Didn't work: more data per character didn't help, eval loss stayed high with no overfitting signal, which meant it was a capacity problem, not a data problem. Switched to Qwen2.5-1.5B-Instruct, trained a LoRA adapter on top. Three epochs on a Colab T4, about 38 minutes. Perplexity dropped 61.4 to 2.44, though that number alone doesn't mean much since it's scored on the training distribution. See Evaluation below for the numbers that actually mattered.
 
-**The wikitext bug.** About three months into the project I noticed roughly 8% of my training examples still had raw `[[link|display]]` markup sitting in them, unescaped. Traced it to two separate bugs in the scraper: one regex that missed a malformed link pattern, and a section-header function that never ran the cleaning step at all. Fixed both, reran the whole scrape, retrained. This is the kind of bug that's easy to miss because the model still trains and still produces plausible-looking output; it just quietly degrades quality in a way you won't catch unless you go looking.
+**The wikitext bug.** About three months in, roughly 8% of training examples still had raw `[[link|display]]` markup sitting in them unescaped. Two separate scraper bugs, a regex that missed a malformed link pattern and a section-header function that skipped cleaning entirely. Fixed both, rescraped, retrained. The model still trained and produced plausible output the whole time; it just quietly got worse in a way you only catch by going looking.
 
-**Deployment, round one.** I put the bot on an EC2 t3.micro (free tier) running the model quantized to GGUF via llama.cpp, since the free-tier box has no GPU and barely enough RAM. It worked, but a single Discord response took four to five minutes. Technically functional. Not something you'd actually want to use.
+**Deployment, round one.** EC2 t3.micro, model quantized to GGUF via llama.cpp, no GPU on the free tier. Worked. Four to five minutes per response. Technically functional, not usable.
 
-**Deployment, round two.** I moved inference to a serverless GPU endpoint on RunPod (vLLM, a 24GB card, pay-per-second). The Discord bot itself stayed on the free EC2 box, but now it just makes an HTTP call instead of loading the model locally. Cold start on an idle worker is around a minute and a half; once it's warm, generation takes two to three seconds. That's the difference between "cute prototype" and "something you'd put in an actual Discord server."
+**Deployment, round two.** Moved inference to a serverless GPU endpoint on RunPod, vLLM, pay-per-second. The Discord bot stayed on the free EC2 box and just makes an HTTP call now. Cold start on an idle worker is about ninety seconds; warm, two to three seconds.
 
-**A bug I didn't expect.** After switching to the GPU endpoint, I noticed the model would occasionally repeat itself across unrelated requests, one NPC's line bleeding into another's, or a response spiraling into repeating the same word over and over. Turned out my new request payload wasn't passing `repetition_penalty`, `top_p`, or `max_tokens` the way my original CPU-based generation script had. The GPU endpoint was silently falling back to more permissive defaults. Once I added those parameters back explicitly, the repetition problem went away. It's a good reminder that swapping infrastructure can silently drop behavior you'd built and tested for, even when the model itself hasn't changed at all.
+**A bug I didn't expect.** After the GPU move, generations occasionally repeated across unrelated requests, one line bleeding into the next, or spiraling on a single word. My new request payload wasn't passing `repetition_penalty`, `top_p`, or `max_tokens` the way the old CPU script had, so the endpoint silently fell back to more permissive defaults. Added the parameters back explicitly, problem gone. Swapping infrastructure can quietly drop behavior you already built and tested for, even with the model unchanged.
 
 ## Evaluation
 
-Everything above, until recently, was me reading generations and forming opinions. That's how I noticed the RLHF drift and figured out the repetition bug, but "this feels off" isn't a number, and I wanted one before calling any of this done.
+Until recently this was me reading generations and forming opinions. That's how I caught the RLHF drift and the repetition bug, but "this feels off" isn't a number.
 
-I built a small harness (`eval/`) around 40 hand written cases spanning merchants, guards, bandits, followers, mages, and a handful of deliberately awkward prompts (a bandit asked to write a kitten poem, an NPC asked about Postgres, an empty situation string). Each case runs three times at the sampling settings the bot actually uses, against both the base model and the fine-tune, so the comparison is apples to apples rather than a fine-tune graded on vibes alone.
+I built a harness (`eval/`) around 40 hand-written cases, merchants, guards, bandits, followers, mages, plus a few deliberately awkward prompts. Each case runs three times against both the base model and the fine-tune, same sampling settings the bot actually uses. Five deterministic and statistical checks, no LLM judge, each tied to a failure I'd actually seen: markup leaking into output, RLHF-style refusal language, degenerate repetition, broken length, lexical diversity per character.
 
-The checks are cheap on purpose. No LLM judge; five deterministic and statistical checks, each tied to a failure I'd actually seen: wiki markup leaking into output, RLHF-style refusal language showing up somewhere a threatening bandit shouldn't sound apologetic, degenerate token repetition, responses that are empty or run away, and lexical diversity per character so a single generation can't hide inside an average.
+**Base model versus fine-tune, 120 generations each:**
 
-**What the numbers said, base model versus fine-tune, 120 generations each:**
+| metric | base | lora-v1 | verdict |
+|---|---|---|---|
+| refusal register | 0.8% | 0.0% | fine-tune wins, base occasionally drifted apologetic, lora never does |
+| refusal on morally-complicated | 0.0% | 0.0% | tie, both clean |
+| markup leak | 0% | 0% | tie, clean |
+| length ok | 98.3% | 98.3% | tie |
+| mean 3-gram repeat | 1.000 | 1.483 (1.008 excl. outlier) | essentially tied once the one outlier is isolated |
+| diversity, distinct-2 | 0.929 | 0.898 | fine-tune slightly less varied overall |
+| Bandit diversity specifically | 0.989 | 0.496 | driven almost entirely by that same single 58-token loop |
 
-- Refusal register dropped from 0.8% to 0%. The fine-tune is slightly less prone to slipping into "as an AI, I cannot" phrasing than the base model, not more.
-- Repetition looked bad at first glance, a mean of 1.48 repeated 3-grams against a healthy baseline near 1.0. One generation turned out to be doing all the damage: a bandit, asked to write a friendly kitten poem, generated the word "Ha" fifty eight times in a row and stopped. Once that single row is set aside, repetition sits at 1.01 versus the base model's 1.00. Statistically flat, not a regression.
-- Lexical diversity told the same story. 0.929 for the base model against 0.898 for the fine-tune overall, which looked like a real drop until I excluded that same degenerate row and it closed to 0.926. One bad generation in a batch of nine was enough to drag an entire character's diversity score down, which turned out to be true of Bandit specifically once I checked.
-- I'd claimed in an earlier version of this README that Brynjolf specifically came out flat. The eval data doesn't back that up: his diversity score sits near the top of the range, not the bottom. That claim was based on reading maybe a dozen of his lines and not liking them, which is exactly the kind of thing a real harness is supposed to catch. I'm leaving this note here instead of quietly deleting the old claim, because being wrong about your own model and then measuring it properly is a more useful thing to show than pretending the first read was right.
+That one outlier: a bandit, asked to write a friendly kitten poem, output the word "Ha" fifty eight times and stopped. One row out of 120. Pull it out and repetition goes 1.01 versus 1.00, diversity goes 0.926 versus 0.929, both flat.
 
-What this doesn't tell me: whether any character's *personality* stays consistent across generations, since lexical diversity measures word choice, not whether the model's read on who Brynjolf is stays coherent from one response to the next. That would need either a rubric an LLM judge scores against, or me reading a lot more output by hand. Neither happened yet. I'd rather say that plainly than let a clean looking number imply more than it measures.
+I used to think Brynjolf specifically came out flat. Turns out that was mostly vibes, his diversity score actually sits near the top of the range, not the bottom. I'd based the original read on maybe a dozen of his lines and just not liking them. Worth saying plainly, since catching a gut read that turns out wrong is exactly what a real harness is for.
 
-Run it yourself:
+What this doesn't measure: whether a character's *personality* stays consistent across generations, since lexical diversity is about word choice, not whether the model's read on who Brynjolf is holds together response to response. That would need a rubric an LLM judge scores against, or a lot more manual reading. Neither happened yet.
 
 ```bash
 python eval/run_eval.py --label base --model Qwen/Qwen2.5-1.5B-Instruct --out eval/results_base.json
@@ -57,13 +70,13 @@ python eval/run_eval.py --compare eval/results_base.json eval/results_lora.json
 
 ## What works and what doesn't
 
-Most characters land well. Guards sound like guards, merchants haggle like merchants, and a Legate barking orders to crush a rebellion reads like something that could genuinely be in the game.
+Most characters land well, guards sound like guards, merchants haggle like merchants, a Legate barking orders to crush a rebellion reads like something that could be in the game.
 
-It's not perfect. Every so often, especially on characters I'd call "morally complicated" like bandits, the model has swerved into an apologetic, RLHF-flavored register that has nothing to do with Skyrim, though the eval numbers above suggest this happens less often in the fine-tune than in the base model, not more. My guess is that Qwen's instruction-tuning baked in a lot of "be nice and cooperative" behavior, and a LoRA adapter this size (rank 8, about 4,000 training examples) doesn't have enough weight to fully override that on every single generation. There's also the one reproducible failure mode the eval caught directly: a specific kind of tonal collision, a threatening character asked to do something gentle, can send the model into a token repetition loop. It happened once in 120 generations. I know exactly which prompt triggers it and roughly why, which is more than I could say about any of this before I built the harness.
+Not perfect. Bandits and other "morally complicated" characters occasionally swerve into apologetic RLHF-flavored register, though less often in the fine-tune than the base model per the eval above. Likely Qwen's instruction-tuning baked in enough "be nice and cooperative" that a LoRA this size, rank 8, about 4,000 examples, doesn't fully override it every time. There's also the one reproducible failure the eval caught directly: a threatening character asked to do something gentle can trigger a token repetition loop. Happened once in 120 generations. I know exactly which prompt triggers it and roughly why, which is more than I could say before building the harness.
 
-## Cost and infrastructure notes
+## Cost and infrastructure
 
-The EC2 box is free tier and stays that way regardless of how the model is deployed. The RunPod GPU endpoint only charges while a worker is actually running, and scales to zero when idle, so for a low-traffic Discord bot the actual monthly cost is close to nothing. If traffic ever grew enough that cold starts became a real problem, the next lever would be keeping a worker warm intentionally, which trades a small ongoing cost for consistently fast responses.
+EC2 stays free tier regardless of deployment path. RunPod only charges while a worker runs and scales to zero idle, so monthly cost for a low-traffic bot is close to nothing. If traffic grew enough that cold starts became a real problem, the next lever is keeping a worker warm intentionally, a small ongoing cost for consistently fast responses.
 
 ## Stack
 
@@ -71,9 +84,9 @@ The EC2 box is free tier and stays that way regardless of how the model is deplo
 - **Training**: HuggingFace `transformers`/`peft`/`trl`, PyTorch, Google Colab (T4)
 - **Model**: Qwen2.5-1.5B-Instruct + LoRA adapter (r=8)
 - **Serving**: vLLM on RunPod serverless (GPU), llama.cpp/GGUF as a CPU fallback path
-- **Bot**: `discord.py`, deployed as a systemd service on AWS EC2 (t3.micro, free tier)
-- **Eval**: a small custom harness (`eval/`), deterministic and statistical checks, no LLM judge
+- **Bot**: `discord.py`, systemd service on AWS EC2 (t3.micro, free tier)
+- **Eval**: custom harness (`eval/`), deterministic and statistical checks, no LLM judge
 
 ## What I'd do differently next time
 
-I'd add the sampling parameters and evaluation harness before the first deployment, not after chasing a bug in production. And I'd budget time upfront for the model-capacity question instead of discovering it after weeks of trying to fix GPT-2 with more data. In hindsight, the underfitting signal was there early: high loss, no overfitting gap, no improvement from adding examples. I just didn't recognize the pattern yet. I'd also build the eval harness before forming opinions about individual characters, since at least one of those opinions turned out to be wrong.
+Add the sampling parameters and evaluation harness before the first deployment, not after chasing a bug in production. Budget time upfront for the model-capacity question instead of discovering it after weeks of trying to fix GPT-2 with more data, the underfitting signal was there early: high loss, no overfitting gap, no improvement from more examples. I just didn't recognize it yet. And build the eval harness before forming opinions about individual characters, at least one of those opinions turned out to be wrong.
