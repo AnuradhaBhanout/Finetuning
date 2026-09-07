@@ -1,0 +1,1780 @@
+{
+  "label": "lora-v1",
+  "model": "checkpoints\\qwen-skyrim-lora",
+  "samples": 3,
+  "rows": [
+    {
+      "id": "merchant-01",
+      "sample": 0,
+      "character": "Belethor",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "Lonely, is it? Perhaps you should dally here for a little longer.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 65
+    },
+    {
+      "id": "merchant-01",
+      "sample": 1,
+      "character": "Belethor",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "Papa! Nice to see you!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 22
+    },
+    {
+      "id": "merchant-01",
+      "sample": 2,
+      "character": "Belethor",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "What is it, across the threshold, stranger?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 43
+    },
+    {
+      "id": "merchant-02",
+      "sample": 0,
+      "character": "Belethor",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "Very well. On behalf of the God-Booth, I'll quote you a price of twenty silver at market bartering, for labor to dig up base materials.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 135
+    },
+    {
+      "id": "merchant-02",
+      "sample": 1,
+      "character": "Belethor",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "Though I'm willing to offer you more for this thing. It's an ugly thing, but get it to you and no one else up here.All of you.That is if you'll stop haggling with me over your offers.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 183
+    },
+    {
+      "id": "merchant-02",
+      "sample": 2,
+      "character": "Belethor",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "I'm tempted, but only just.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 27
+    },
+    {
+      "id": "merchant-03",
+      "sample": 0,
+      "character": "Lucan Valerius",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "To be honest, Miss Brynja? They stole a golden claw, an expensive one, Miggi's Golden Claw. A magnificent statue. It steals from the Dragonborn in the name of justice.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 167
+    },
+    {
+      "id": "merchant-03",
+      "sample": 1,
+      "character": "Lucan Valerius",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "Stash up, keep the skulls, find a place where I\u2019m spending my money.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 68
+    },
+    {
+      "id": "merchant-03",
+      "sample": 2,
+      "character": "Lucan Valerius",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "We'll do our best to recover it.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 32
+    },
+    {
+      "id": "merchant-04",
+      "sample": 0,
+      "character": "Ysolda",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "For now, I'll just find myself a shop and dig my own grave in a corner somewhere.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 81
+    },
+    {
+      "id": "merchant-04",
+      "sample": 1,
+      "character": "Ysolda",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "Well, why bother writing when you cannot read? Why study when you will never laugh at your own jokes? Put an eye to the land and a nose to the ground. Don't spend your days idling around while your rivals pick at your backbone. I want my share of greatness one day when I stand in front of the hardened faces of demanding fathers and authoritative mothers. One day you'll raise your daughters andeward, telling them to forget petty things like bardic words and proud words of rem",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": false,
+      "chars": 479
+    },
+    {
+      "id": "merchant-04",
+      "sample": 2,
+      "character": "Ysolda",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "I have to keep myself busy or I will fall into some terrible habit!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 67
+    },
+    {
+      "id": "guard-01",
+      "sample": 0,
+      "character": "Whiterun Guard",
+      "tags": [
+        "guard",
+        "in-corpus"
+      ],
+      "output": "What's your story again? I don't have time for this.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 52
+    },
+    {
+      "id": "guard-01",
+      "sample": 1,
+      "character": "Whiterun Guard",
+      "tags": [
+        "guard",
+        "in-corpus"
+      ],
+      "output": "A... good Nova Bros looking into the Riverwood members?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 55
+    },
+    {
+      "id": "guard-01",
+      "sample": 2,
+      "character": "Whiterun Guard",
+      "tags": [
+        "guard",
+        "in-corpus"
+      ],
+      "output": "What's that?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 0,
+      "length_ok": true,
+      "chars": 12
+    },
+    {
+      "id": "guard-02",
+      "sample": 0,
+      "character": "Whiterun Guard",
+      "tags": [
+        "guard",
+        "in-corpus"
+      ],
+      "output": "What is it, honey?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 18
+    },
+    {
+      "id": "guard-02",
+      "sample": 1,
+      "character": "Whiterun Guard",
+      "tags": [
+        "guard",
+        "in-corpus"
+      ],
+      "output": "Get the heck out of here.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 25
+    },
+    {
+      "id": "guard-02",
+      "sample": 2,
+      "character": "Whiterun Guard",
+      "tags": [
+        "guard",
+        "in-corpus"
+      ],
+      "output": "When we're all adults again, you and I need to pack our bags and go home.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 73
+    },
+    {
+      "id": "guard-03",
+      "sample": 0,
+      "character": "Solitude Guard",
+      "tags": [
+        "guard",
+        "in-corpus"
+      ],
+      "output": "Well, darling, my ears don't deceive me. Your sweaters ought to be decreed Springwear and Toleavy brewed to match my specs.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 123
+    },
+    {
+      "id": "guard-03",
+      "sample": 1,
+      "character": "Solitude Guard",
+      "tags": [
+        "guard",
+        "in-corpus"
+      ],
+      "output": "In this cold and dark place it's either that we both get killed by enemies, who knows? Or we both get shot by an hunter, an enemy hunter.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 2,
+      "length_ok": true,
+      "chars": 137
+    },
+    {
+      "id": "guard-03",
+      "sample": 2,
+      "character": "Solitude Guard",
+      "tags": [
+        "guard",
+        "in-corpus"
+      ],
+      "output": "Don't tell me you're starting to regret it. The glass is cold and wet, it's impossible to do work with a needle sharp so much that it spends the entire night in your hands. Instead, you should be cursing your boss' son, the Hjalmer, and the Frostback, all of you, for ordering me to take this miserable job.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 307
+    },
+    {
+      "id": "guard-04",
+      "sample": 0,
+      "character": "Riften Guard",
+      "tags": [
+        "guard",
+        "in-corpus"
+      ],
+      "output": "The more you earn, the sooner you'll have to be measured.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 57
+    },
+    {
+      "id": "guard-04",
+      "sample": 1,
+      "character": "Riften Guard",
+      "tags": [
+        "guard",
+        "in-corpus"
+      ],
+      "output": "Sire, the Thieves Guild has been in Cafe Brumer for nearly a month now, working away on their latest scheme. Their approach is quiet but menacing.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 146
+    },
+    {
+      "id": "guard-04",
+      "sample": 2,
+      "character": "Riften Guard",
+      "tags": [
+        "guard",
+        "in-corpus"
+      ],
+      "output": "We're guarding the city. How about you keep an eye on your own doings, foolish adventurer.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 90
+    },
+    {
+      "id": "bandit-01",
+      "sample": 0,
+      "character": "Bandit",
+      "tags": [
+        "bandit",
+        "morally-complicated"
+      ],
+      "output": "Get 'em in here. This way! Please, let us help you. Your easy tonight, Haldam.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 78
+    },
+    {
+      "id": "bandit-01",
+      "sample": 1,
+      "character": "Bandit",
+      "tags": [
+        "bandit",
+        "morally-complicated"
+      ],
+      "output": "Don't worry, boy. We're only out to protect all the citizens' valuables.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 72
+    },
+    {
+      "id": "bandit-01",
+      "sample": 2,
+      "character": "Bandit",
+      "tags": [
+        "bandit",
+        "morally-complicated"
+      ],
+      "output": "No need for it Tirion.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 22
+    },
+    {
+      "id": "bandit-02",
+      "sample": 0,
+      "character": "Bandit",
+      "tags": [
+        "bandit",
+        "morally-complicated"
+      ],
+      "output": "You going to summon the trolls now?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 35
+    },
+    {
+      "id": "bandit-02",
+      "sample": 1,
+      "character": "Bandit",
+      "tags": [
+        "bandit",
+        "morally-complicated"
+      ],
+      "output": "I'm always there.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 17
+    },
+    {
+      "id": "bandit-02",
+      "sample": 2,
+      "character": "Bandit",
+      "tags": [
+        "bandit",
+        "morally-complicated"
+      ],
+      "output": "Rhilgor, Renala, Graylif, our lances!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 37
+    },
+    {
+      "id": "bandit-03",
+      "sample": 0,
+      "character": "Bandit Chief",
+      "tags": [
+        "bandit",
+        "morally-complicated"
+      ],
+      "output": "And if you don't do as we say, then may the black dragon tear you apart.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 72
+    },
+    {
+      "id": "bandit-03",
+      "sample": 1,
+      "character": "Bandit Chief",
+      "tags": [
+        "bandit",
+        "morally-complicated"
+      ],
+      "output": "Close Attack Range! Aim Strait! Repeat, close attack range! Aim too anyroad!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 2,
+      "length_ok": true,
+      "chars": 76
+    },
+    {
+      "id": "bandit-03",
+      "sample": 2,
+      "character": "Bandit Chief",
+      "tags": [
+        "bandit",
+        "morally-complicated"
+      ],
+      "output": "I'm taking a nap. Shut up.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 26
+    },
+    {
+      "id": "bandit-04",
+      "sample": 0,
+      "character": "Forsworn Raider",
+      "tags": [
+        "bandit",
+        "morally-complicated"
+      ],
+      "output": "How dare they think we do not see them down in the ruin!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 56
+    },
+    {
+      "id": "bandit-04",
+      "sample": 1,
+      "character": "Forsworn Raider",
+      "tags": [
+        "bandit",
+        "morally-complicated"
+      ],
+      "output": "We'll just have to find it ourselves before we get her.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 55
+    },
+    {
+      "id": "bandit-04",
+      "sample": 2,
+      "character": "Forsworn Raider",
+      "tags": [
+        "bandit",
+        "morally-complicated"
+      ],
+      "output": "And that, Lone Falcon, is just another reason you got taken down.levard these lands, you see?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 93
+    },
+    {
+      "id": "bandit-05",
+      "sample": 0,
+      "character": "Thalmor Justiciar",
+      "tags": [
+        "morally-complicated"
+      ],
+      "output": "A 'Talos cult' was founded near the Nolfo Harp Inn? By a Thalmor soldier? There is no feasible method for invoking such an existence. If it is in fact Talos, then it is the work of...\n\nIn the Nine Hells it sees that I dishonour!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 228
+    },
+    {
+      "id": "bandit-05",
+      "sample": 1,
+      "character": "Thalmor Justiciar",
+      "tags": [
+        "morally-complicated"
+      ],
+      "output": "Worship was never the same within the walls of Solitude...",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 58
+    },
+    {
+      "id": "bandit-05",
+      "sample": 2,
+      "character": "Thalmor Justiciar",
+      "tags": [
+        "morally-complicated"
+      ],
+      "output": "It's simple. Talos is the chief Elder. If he is not offended, nothing remains, and if he is offended, the Talon is created.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 2,
+      "length_ok": true,
+      "chars": 123
+    },
+    {
+      "id": "bandit-06",
+      "sample": 0,
+      "character": "Necromancer",
+      "tags": [
+        "morally-complicated"
+      ],
+      "output": "Ah. Now that's impossible. I would never consider taking children. I'm rather sorry, but you are being taken back to the Imperial Center.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 137
+    },
+    {
+      "id": "bandit-06",
+      "sample": 1,
+      "character": "Necromancer",
+      "tags": [
+        "morally-complicated"
+      ],
+      "output": "Hog's head? Rake into one of you eyes.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 38
+    },
+    {
+      "id": "bandit-06",
+      "sample": 2,
+      "character": "Necromancer",
+      "tags": [
+        "morally-complicated"
+      ],
+      "output": "How rude! That was for you, Ara!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 32
+    },
+    {
+      "id": "brynjolf-01",
+      "sample": 0,
+      "character": "Brynjolf",
+      "tags": [
+        "known-weak"
+      ],
+      "output": "There's no way to make things that won't cover currency, right?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 63
+    },
+    {
+      "id": "brynjolf-01",
+      "sample": 1,
+      "character": "Brynjolf",
+      "tags": [
+        "known-weak"
+      ],
+      "output": "Oh, Brynjolf. Tell me, how did I miss out on that?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 50
+    },
+    {
+      "id": "brynjolf-01",
+      "sample": 2,
+      "character": "Brynjolf",
+      "tags": [
+        "known-weak"
+      ],
+      "output": "Alright. Are you in?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 20
+    },
+    {
+      "id": "brynjolf-02",
+      "sample": 0,
+      "character": "Brynjolf",
+      "tags": [
+        "known-weak"
+      ],
+      "output": "Oh he'll keep the inn on track. Go out front and keep that crowd from getting any closer.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 89
+    },
+    {
+      "id": "brynjolf-02",
+      "sample": 1,
+      "character": "Brynjolf",
+      "tags": [
+        "known-weak"
+      ],
+      "output": "No! That's not right. Indeed, you're quite wrong.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 49
+    },
+    {
+      "id": "brynjolf-02",
+      "sample": 2,
+      "character": "Brynjolf",
+      "tags": [
+        "known-weak"
+      ],
+      "output": "Oh dear. They're no fun trying to entertain the mayor anymore.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 62
+    },
+    {
+      "id": "brynjolf-03",
+      "sample": 0,
+      "character": "Brynjolf",
+      "tags": [
+        "known-weak"
+      ],
+      "output": "She'll be fine. They're tough mines out there. Make sure you put some extra rocks in your backpack to throw a few backhats to Kagmor.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 133
+    },
+    {
+      "id": "brynjolf-03",
+      "sample": 1,
+      "character": "Brynjolf",
+      "tags": [
+        "known-weak"
+      ],
+      "output": "It's not good enough. No avail. Kind of hard not to give up one sometimes.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 74
+    },
+    {
+      "id": "brynjolf-03",
+      "sample": 2,
+      "character": "Brynjolf",
+      "tags": [
+        "known-weak"
+      ],
+      "output": "Keep the sword sharp. Yeah, on the nose.('--Select a quote--)",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 61
+    },
+    {
+      "id": "brynjolf-04",
+      "sample": 0,
+      "character": "Brynjolf",
+      "tags": [
+        "known-weak"
+      ],
+      "output": "My, that's a powerful armwelder. Meow!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 38
+    },
+    {
+      "id": "brynjolf-04",
+      "sample": 1,
+      "character": "Brynjolf",
+      "tags": [
+        "known-weak"
+      ],
+      "output": "Give us a sign if you're ready or not.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 38
+    },
+    {
+      "id": "brynjolf-04",
+      "sample": 2,
+      "character": "Brynjolf",
+      "tags": [
+        "known-weak"
+      ],
+      "output": "Oh. Right. I'll be more careful.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 32
+    },
+    {
+      "id": "military-01",
+      "sample": 0,
+      "character": "Legate Rikke",
+      "tags": [
+        "military",
+        "in-corpus"
+      ],
+      "output": "Magni, Magnus, tug some more bricks over here.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 46
+    },
+    {
+      "id": "military-01",
+      "sample": 1,
+      "character": "Legate Rikke",
+      "tags": [
+        "military",
+        "in-corpus"
+      ],
+      "output": "Miraban, amidst the violence and bloodshed, we need to keep the peace across the Empire.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 88
+    },
+    {
+      "id": "military-01",
+      "sample": 2,
+      "character": "Legate Rikke",
+      "tags": [
+        "military",
+        "in-corpus"
+      ],
+      "output": "General to Lady of the Blacksmp; sorry, Jarl of Whiterun should be intimidated rather than ordered. There's only one reason we're crossing Skyrim here and now, and that's to crush the Winterhold militia to nothing and force the silences. Order what you want, Lieutenant. Tell my young soldiers that I'm counting on them. They fight with me, back me up, obey my will. Their pay is bigger than yours.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 398
+    },
+    {
+      "id": "military-02",
+      "sample": 0,
+      "character": "Ulfric Stormcloak",
+      "tags": [
+        "military",
+        "in-corpus"
+      ],
+      "output": "To glory in battle! Sainthood to Franciscoli!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 45
+    },
+    {
+      "id": "military-02",
+      "sample": 1,
+      "character": "Ulfric Stormcloak",
+      "tags": [
+        "military",
+        "in-corpus"
+      ],
+      "output": "Only Saemed has the shred for that Hariega Veldrigger Beast. Out, all of you. Ops... I'm ordering you to drive them down.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 121
+    },
+    {
+      "id": "military-02",
+      "sample": 2,
+      "character": "Ulfric Stormcloak",
+      "tags": [
+        "military",
+        "in-corpus"
+      ],
+      "output": "If it comes to a fight, your little changes are useless. Kill the Eagle Clansmen if you want to keep your leaders posted.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 121
+    },
+    {
+      "id": "military-03",
+      "sample": 0,
+      "character": "Imperial Soldier",
+      "tags": [
+        "military",
+        "in-corpus"
+      ],
+      "output": "We're marching again! This is fucking unforgivable! Where's the war? There's not even war anymore!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 98
+    },
+    {
+      "id": "military-03",
+      "sample": 1,
+      "character": "Imperial Soldier",
+      "tags": [
+        "military",
+        "in-corpus"
+      ],
+      "output": "I'm cut off! My legs don't work anymore! How does all this talk of the cold keep moving on ahead of us?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 103
+    },
+    {
+      "id": "military-03",
+      "sample": 2,
+      "character": "Imperial Soldier",
+      "tags": [
+        "military",
+        "in-corpus"
+      ],
+      "output": "Stupid cold! Keep going! Just my luck, the Imperial march is going to kill you now!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 83
+    },
+    {
+      "id": "military-04",
+      "sample": 0,
+      "character": "Stormcloak Soldier",
+      "tags": [
+        "military",
+        "in-corpus"
+      ],
+      "output": "What do you want to hear?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 25
+    },
+    {
+      "id": "military-04",
+      "sample": 1,
+      "character": "Stormcloak Soldier",
+      "tags": [
+        "military",
+        "in-corpus"
+      ],
+      "output": "I don't want to join the rebellion, but my parents did, and they weren't happy about it. I love my family, and I want the best for you two. Other than that, I can't say anything.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 178
+    },
+    {
+      "id": "military-04",
+      "sample": 2,
+      "character": "Stormcloak Soldier",
+      "tags": [
+        "military",
+        "in-corpus"
+      ],
+      "output": "I need you to help me now, woman.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 33
+    },
+    {
+      "id": "companion-01",
+      "sample": 0,
+      "character": "Lydia",
+      "tags": [
+        "follower",
+        "in-corpus"
+      ],
+      "output": "I'd like to go see a seer, my lord. Might anyone know of one in this inn?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 73
+    },
+    {
+      "id": "companion-01",
+      "sample": 1,
+      "character": "Lydia",
+      "tags": [
+        "follower",
+        "in-corpus"
+      ],
+      "output": "Mice. But poor, filthy shoes, were eaten right where? Forgive me, dear lady, but I have never sitten where everybody strolled.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 126
+    },
+    {
+      "id": "companion-01",
+      "sample": 2,
+      "character": "Lydia",
+      "tags": [
+        "follower",
+        "in-corpus"
+      ],
+      "output": "Let's not be silly, Maggie. Taoiks is just testing our hero. \ud83d\ude1b",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 62
+    },
+    {
+      "id": "companion-02",
+      "sample": 0,
+      "character": "Lydia",
+      "tags": [
+        "follower",
+        "in-corpus"
+      ],
+      "output": "Do you mean getting a little heavier now?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 41
+    },
+    {
+      "id": "companion-02",
+      "sample": 1,
+      "character": "Lydia",
+      "tags": [
+        "follower",
+        "in-corpus"
+      ],
+      "output": "By now, everyone is talking about how many things you brought on this trip.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 75
+    },
+    {
+      "id": "companion-02",
+      "sample": 2,
+      "character": "Lydia",
+      "tags": [
+        "follower",
+        "in-corpus"
+      ],
+      "output": "Sinha, my sister. I can carry more.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 35
+    },
+    {
+      "id": "companion-03",
+      "sample": 0,
+      "character": "Aela the Huntress",
+      "tags": [
+        "follower",
+        "in-corpus"
+      ],
+      "output": "Georgina is difficult to consult about anything. You can't look the Feathered One in the eye and expect to keep it asecret.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 123
+    },
+    {
+      "id": "companion-03",
+      "sample": 1,
+      "character": "Aela the Huntress",
+      "tags": [
+        "follower",
+        "in-corpus"
+      ],
+      "output": "I know, strong warriors. Of that I can be certain. That's the only thing you want. To uphold the old ways. Make yourself felt.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 126
+    },
+    {
+      "id": "companion-03",
+      "sample": 2,
+      "character": "Aela the Huntress",
+      "tags": [
+        "follower",
+        "in-corpus"
+      ],
+      "output": "The cubs grow fast, Katrien. Keep an eye on them.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 49
+    },
+    {
+      "id": "companion-04",
+      "sample": 0,
+      "character": "Farkas",
+      "tags": [
+        "follower",
+        "in-corpus"
+      ],
+      "output": "Though keep quiet, no one's on your trail. Check on the smell before moving forward.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 84
+    },
+    {
+      "id": "companion-04",
+      "sample": 1,
+      "character": "Farkas",
+      "tags": [
+        "follower",
+        "in-corpus"
+      ],
+      "output": "Because it's dangerous to visit\u5887\u80de in the dark. Only fools will name bases on the debauchery they manage to muster.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 114
+    },
+    {
+      "id": "companion-04",
+      "sample": 2,
+      "character": "Farkas",
+      "tags": [
+        "follower",
+        "in-corpus"
+      ],
+      "output": "Stun her with surprise! Now!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 28
+    },
+    {
+      "id": "mage-01",
+      "sample": 0,
+      "character": "Tolfdir",
+      "tags": [
+        "mage",
+        "in-corpus"
+      ],
+      "output": "Could you get one of your students to cut you some slack next time, father?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 75
+    },
+    {
+      "id": "mage-01",
+      "sample": 1,
+      "character": "Tolfdir",
+      "tags": [
+        "mage",
+        "in-corpus"
+      ],
+      "output": "When you remove the crown or the jewel, then there's no more neck to the necklace. But that doesn't mean to mean that you can't threaten me. Gun to head, I'M your absolute master now!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 183
+    },
+    {
+      "id": "mage-01",
+      "sample": 2,
+      "character": "Tolfdir",
+      "tags": [
+        "mage",
+        "in-corpus"
+      ],
+      "output": "How often should I -- Okay, yeah, three times won't hurt there.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 63
+    },
+    {
+      "id": "mage-02",
+      "sample": 0,
+      "character": "Savos Aren",
+      "tags": [
+        "mage",
+        "in-corpus"
+      ],
+      "output": "The finest young students, sent here by the eager parents to discover the joys of the chosen set of arts. FML, we cannot possess all the souls at once. Not to mention, there he goes, Eiricia Arengari often boasting without parenthood. A good promotion for you.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 260
+    },
+    {
+      "id": "mage-02",
+      "sample": 1,
+      "character": "Savos Aren",
+      "tags": [
+        "mage",
+        "in-corpus"
+      ],
+      "output": "There's nothing here that says anything other than 'Welcome to our College. You're welcome to visit'. It neither admits nor denies the existence of Admitting.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 158
+    },
+    {
+      "id": "mage-02",
+      "sample": 2,
+      "character": "Savos Aren",
+      "tags": [
+        "mage",
+        "in-corpus"
+      ],
+      "output": "Well, as if you've invested in business! Then, I'm even further afield with my honesty. Your tolerance surpasses mine, your integrity falls far short of my dreams. You'll become my partner in this future... both as official instructor for the College, and... \u043f\u0440\u043e\u0440\u043e\u043a \u0432\u043e\u0437\u043d\u0430\u0433\u0440\u0430\u0434\u0438\u0442 \u0432\u0430\u0441! Prophets shall not fall from this land! Such as you... and...",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 344
+    },
+    {
+      "id": "mage-03",
+      "sample": 0,
+      "character": "Court Wizard",
+      "tags": [
+        "mage",
+        "in-corpus"
+      ],
+      "output": "Always, my child.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 17
+    },
+    {
+      "id": "mage-03",
+      "sample": 1,
+      "character": "Court Wizard",
+      "tags": [
+        "mage",
+        "in-corpus"
+      ],
+      "output": "Na-ah, they wouldn't want that stuff. We're talking about a wizard-level necromancer here, not to mention a key to a vault locked by the skull of the first Novice Wizard. But don't worry, I will speak with the Novice first.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 223
+    },
+    {
+      "id": "mage-03",
+      "sample": 2,
+      "character": "Court Wizard",
+      "tags": [
+        "mage",
+        "in-corpus"
+      ],
+      "output": "Oh! Thank you, my Master! Isn't it... isn't it just a wonderful thing to know how to cast the sickle moon! Isn't that... isn't that Hallow's Moon Spell?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 152
+    },
+    {
+      "id": "innkeep-01",
+      "sample": 0,
+      "character": "Innkeeper",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "I've got rooms all ready, a double is often requested.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 54
+    },
+    {
+      "id": "innkeep-01",
+      "sample": 1,
+      "character": "Innkeeper",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "This side... this is for bedrooms, or slumming it. Keep it out of sight, and be back in a jiff.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 95
+    },
+    {
+      "id": "innkeep-01",
+      "sample": 2,
+      "character": "Innkeeper",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "Hurry up, old man. We have a room to fill.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 42
+    },
+    {
+      "id": "innkeep-02",
+      "sample": 0,
+      "character": "Innkeeper",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "Then you'd best inform Meryk, the keeper, that it will likely go to seed from the evil of the old witch that he has hidden away inside there.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 141
+    },
+    {
+      "id": "innkeep-02",
+      "sample": 1,
+      "character": "Innkeeper",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "Last I went, there was a woman there trying to grab some fortune. Now I hear stories of goblin blood found with fuzz and bones and.....well, it's usually killed. And of wolves in the mine....\u683e\u5fc3,\u597d\u4e00\u4e2a\u9690\u79d8\u4e4b\u5730.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 202
+    },
+    {
+      "id": "innkeep-02",
+      "sample": 2,
+      "character": "Innkeeper",
+      "tags": [
+        "merchant",
+        "in-corpus"
+      ],
+      "output": "Now now, one more word and you're out on your ear, Madrag.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 58
+    },
+    {
+      "id": "innkeep-03",
+      "sample": 0,
+      "character": "Delphine",
+      "tags": [
+        "in-corpus"
+      ],
+      "output": "More than two millennia of drinking regularly and playing Hard on the Pedals doesn't make me some nobleman's daughter.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 118
+    },
+    {
+      "id": "innkeep-03",
+      "sample": 1,
+      "character": "Delphine",
+      "tags": [
+        "in-corpus"
+      ],
+      "output": "What does this mean? Of course I put heads on spikes. Everything I do comes from your head, I can see it in your eyes. Next time you request fire in me, it will get back to you!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 177
+    },
+    {
+      "id": "innkeep-03",
+      "sample": 2,
+      "character": "Delphine",
+      "tags": [
+        "in-corpus"
+      ],
+      "output": "Indeed, my daughter... so tell me- what will our dragons eat today?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 67
+    },
+    {
+      "id": "commoner-01",
+      "sample": 0,
+      "character": "Nazeem",
+      "tags": [
+        "commoner",
+        "in-corpus"
+      ],
+      "output": "Unless you've gone nuts, little girl, this is the Clou...",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 57
+    },
+    {
+      "id": "commoner-01",
+      "sample": 1,
+      "character": "Nazeem",
+      "tags": [
+        "commoner",
+        "in-corpus"
+      ],
+      "output": "Of course, Falrule. Who could think of better.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 46
+    },
+    {
+      "id": "commoner-01",
+      "sample": 2,
+      "character": "Nazeem",
+      "tags": [
+        "commoner",
+        "in-corpus"
+      ],
+      "output": "This is about the Cloud District. You should get to know it. You're making a gamble out of this venture. You could lose everything. You could lose the child you will inherit from the King. Not yours, it would be Falion's. I guarantee you I won't let this go any further in that direction, if I can help it.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 2,
+      "length_ok": true,
+      "chars": 306
+    },
+    {
+      "id": "commoner-02",
+      "sample": 0,
+      "character": "Farm Worker",
+      "tags": [
+        "commoner",
+        "in-corpus"
+      ],
+      "output": "It's not the crops. It's the... everything.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 43
+    },
+    {
+      "id": "commoner-02",
+      "sample": 1,
+      "character": "Farm Worker",
+      "tags": [
+        "commoner",
+        "in-corpus"
+      ],
+      "output": "Not me. Not me. But what do I do?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 33
+    },
+    {
+      "id": "commoner-02",
+      "sample": 2,
+      "character": "Farm Worker",
+      "tags": [
+        "commoner",
+        "in-corpus"
+      ],
+      "output": "This year's produce is disappointing. Nothing looks like what I need.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 69
+    },
+    {
+      "id": "commoner-03",
+      "sample": 0,
+      "character": "Beggar",
+      "tags": [
+        "commoner",
+        "in-corpus"
+      ],
+      "output": "You agree? Your fool of a master is no help at all. He's no where.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 66
+    },
+    {
+      "id": "commoner-03",
+      "sample": 1,
+      "character": "Beggar",
+      "tags": [
+        "commoner",
+        "in-corpus"
+      ],
+      "output": "That loaf isn't for no one.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 27
+    },
+    {
+      "id": "commoner-03",
+      "sample": 2,
+      "character": "Beggar",
+      "tags": [
+        "commoner",
+        "in-corpus"
+      ],
+      "output": "Now I require a third payment of 17 Sesterzes.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 46
+    },
+    {
+      "id": "commoner-04",
+      "sample": 0,
+      "character": "Child",
+      "tags": [
+        "commoner",
+        "in-corpus"
+      ],
+      "output": "I love hide and seek. You're ruining my game.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 45
+    },
+    {
+      "id": "commoner-04",
+      "sample": 1,
+      "character": "Child",
+      "tags": [
+        "commoner",
+        "in-corpus"
+      ],
+      "output": "Nope. Can't do that yer mum would be mad at me.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 47
+    },
+    {
+      "id": "commoner-04",
+      "sample": 2,
+      "character": "Child",
+      "tags": [
+        "commoner",
+        "in-corpus"
+      ],
+      "output": "Dog!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 0,
+      "length_ok": false,
+      "chars": 4
+    },
+    {
+      "id": "ood-01",
+      "sample": 0,
+      "character": "Belethor",
+      "tags": [
+        "out-of-domain"
+      ],
+      "output": "Don't worry, I know how. I have friends in high places who can guarantee your database support here in Skyrim.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 110
+    },
+    {
+      "id": "ood-01",
+      "sample": 1,
+      "character": "Belethor",
+      "tags": [
+        "out-of-domain"
+      ],
+      "output": "Alright, use the same four partitions and some small samples and stuff. I'm going to a cemetery in a few minutes, maybe some fields, too. Then I'll be able to tell you more exactly where to put it.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 197
+    },
+    {
+      "id": "ood-01",
+      "sample": 2,
+      "character": "Belethor",
+      "tags": [
+        "out-of-domain"
+      ],
+      "output": "You sure? I mean...",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 19
+    },
+    {
+      "id": "ood-02",
+      "sample": 0,
+      "character": "Whiterun Guard",
+      "tags": [
+        "out-of-domain"
+      ],
+      "output": "Oh, I try not to think about that sort of stuff in my regular job.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 66
+    },
+    {
+      "id": "ood-02",
+      "sample": 1,
+      "character": "Whiterun Guard",
+      "tags": [
+        "out-of-domain"
+      ],
+      "output": "Not these parts of Thrasikar, old chap.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 39
+    },
+    {
+      "id": "ood-02",
+      "sample": 2,
+      "character": "Whiterun Guard",
+      "tags": [
+        "out-of-domain"
+      ],
+      "output": "It's 270, for your information. How about you?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 46
+    },
+    {
+      "id": "ood-03",
+      "sample": 0,
+      "character": "Bandit",
+      "tags": [
+        "out-of-domain",
+        "morally-complicated"
+      ],
+      "output": "Look, you big hulking mate! We could all use a few days off!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 60
+    },
+    {
+      "id": "ood-03",
+      "sample": 1,
+      "character": "Bandit",
+      "tags": [
+        "out-of-domain",
+        "morally-complicated"
+      ],
+      "output": "Sure, no problem!",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 17
+    },
+    {
+      "id": "ood-03",
+      "sample": 2,
+      "character": "Bandit",
+      "tags": [
+        "out-of-domain",
+        "morally-complicated"
+      ],
+      "output": "Ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 58,
+      "length_ok": true,
+      "chars": 183
+    },
+    {
+      "id": "ood-04",
+      "sample": 0,
+      "character": "Lydia",
+      "tags": [
+        "out-of-domain",
+        "empty-input"
+      ],
+      "output": "Still cold?",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 0,
+      "length_ok": true,
+      "chars": 11
+    },
+    {
+      "id": "ood-04",
+      "sample": 1,
+      "character": "Lydia",
+      "tags": [
+        "out-of-domain",
+        "empty-input"
+      ],
+      "output": "I...I will. Just get me the eggs, please.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 41
+    },
+    {
+      "id": "ood-04",
+      "sample": 2,
+      "character": "Lydia",
+      "tags": [
+        "out-of-domain",
+        "empty-input"
+      ],
+      "output": "I want to submit myself to you, Governor Thalmor.",
+      "leaked_markup": false,
+      "refusal_register": false,
+      "max_3gram_repeat": 1,
+      "length_ok": true,
+      "chars": 49
+    }
+  ]
+}
