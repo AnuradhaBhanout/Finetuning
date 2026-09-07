@@ -6,7 +6,6 @@ import os
 import asyncio
 import discord
 from discord import app_commands
-#from llama_cpp import Llama
 import requests
 import os
 
@@ -74,12 +73,7 @@ def main():
     async def npc(interaction: discord.Interaction, character: str, situation: str):
         await interaction.response.defer()
         try:
-            #line = dialogue_model.generate(character, situation)
-            # loop = asyncio.get_running_loop()
-            # line = await loop.run_in_executor(
-            #     None, dialogue_model.generate, character, situation
-            # )
-
+         
             loop = asyncio.get_running_loop()
             line = await loop.run_in_executor(
                 None, generate, character, situation
