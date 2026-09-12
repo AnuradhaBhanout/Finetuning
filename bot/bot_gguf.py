@@ -1,5 +1,5 @@
-"""bot_gguf.py — Skyrim NPC Discord bot, running on the quantized GGUF model via
-llama-cpp-python instead of transformers/torch."""
+"""bot_gguf.py — the Skyrim NPC Discord bot, talking to a RunPod/vLLM
+endpoint over HTTP. """
 
 import argparse
 import os
